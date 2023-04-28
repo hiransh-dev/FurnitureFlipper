@@ -1,0 +1,42 @@
+<% layout('./layouts/boilerplate') %>
+<div id="mason" data-masonry='{"percentPosition": true }'>
+  <% for(let furniture of all_furniture){%>
+  <div class="mason_col">
+    <!-- style="width: 33%" -->
+    <div class="uk-card mason_card">
+      <a href="furniture/<%= furniture._id %>" class="uk-text-decoration-none">
+        <img
+          id="mason_img"
+          class="uk-card-media-top imgblock"
+          src="<%= furniture.imageurl %> "
+        />
+        <div class="uk-card-body">
+          <div id="badge-label-font" class="uk-card-badge uk-label-warning">
+            £ <%= furniture.price %>
+          </div>
+          <p class="uk-card-title">
+            <label id="mason-card-font"> <%= furniture.title %> </label>
+          </p>
+        </div>
+      </a>
+    </div>
+  </div>
+  <% } %>
+</div>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
+  integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+  crossorigin="anonymous"
+  async
+></script>
+
+<script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+<script>
+  const gridMason = document.querySelector("#mason");
+  const varMason = function createMasonLayout() {
+    const msnry = new Masonry(gridMason, { percentPosition: true });
+    gridMason.style.visibility = "visible";
+  };
+  imagesLoaded(gridMason, varMason); //only checks if all the images are loaded
+</script>

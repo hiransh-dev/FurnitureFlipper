@@ -1,0 +1,63 @@
+<% layout('./layouts/boilerplate') %>
+<form
+  class="uk-container uk-container-xsmall uk-align-center uk-form-horizontal"
+  action="/furniture/new"
+  method="POST"
+>
+  <legend id="new-label-font" class="uk-legend">
+    List your used Furniture with us
+  </legend>
+  <div class="uk-margin">
+    <label id="new-label-font" class="uk-form-label" for="furniture[title]"
+      >Title</label
+    >
+    <input
+      class="uk-input uk-form-width-large"
+      type="text"
+      placeholder="Title"
+      name="furniture[title]"
+    />
+  </div>
+  <div class="uk-margin">
+    <label id="new-label-font" class="uk-form-label" for="furniture[price]"
+      >Price</label
+    >
+    <label>£</label>
+    <input
+      class="uk-input uk-form-width-small"
+      type="text"
+      placeholder="Price"
+      name="furniture[price]"
+    />
+  </div>
+  <div class="uk-margin">
+    <label id="new-label-font" class="uk-form-label" for="furniture[imageurl]"
+      >Image Upload</label
+    >
+    <input
+      class="uk-input uk-form-width-large"
+      type="text"
+      placeholder="Image URL"
+      name="furniture[imageurl]"
+    />
+  </div>
+  <div class="uk-margin">
+    <label id="new-label-font" class="uk-form-label" for="furniture[desc]"
+      >Description</label
+    >
+    <textarea
+      class="uk-textarea"
+      rows="3"
+      placeholder="Description"
+      name="furniture[desc]"
+    ></textarea>
+    <div class="uk-margin">
+      <button
+        class="uk-button uk-button-default uk-button-large uk-align-center"
+        type="submit"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</form>

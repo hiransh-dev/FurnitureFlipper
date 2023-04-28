@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Furniture Flipper | <%= title %></title>
+    <meta
+      name="description"
+      content="Furniture Flipper, used furniture, old furniture, buy used furniture, second hand furniture"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- <link rel="stylesheet" href="" /> -->
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/uikit.min.css" />
+  </head>
+  <body>
+    <%- include("../partials/navbar"); %>
+    <div class="uk-section">
+      <main class="uk-container uk-container-xlarge main-class">
+        <%- body %>
+      </main>
+    </div>
+    <%- include("../partials/footer"); %>
+
+    <!-- <script src=""></script> -->
+    <script src="/js/uikit.min.js"></script>
+    <script src="/js/uikit-icons.min.js"></script>
+  </body>
+</html>

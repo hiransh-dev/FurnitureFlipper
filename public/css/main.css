@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Ysabeau:ital@0;1&display=swap");
+
+body {
+  min-height: 100vh;
+  margin-bottom: 2vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAVBAR STYLES */
+.nav-bar {
+  background-color: black;
+}
+#nav-bar-full {
+  display: contents;
+}
+#nav-bar-small {
+  display: none;
+}
+#logo-font {
+  font-family: "Ysabeau", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 2rem;
+  color: white;
+}
+#nav-bar-font {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  color: white;
+}
+
+/* BODY STYLES */
+.main-class {
+  margin-top: 0vh;
+  margin-bottom: 2vh;
+  margin-left: 0vh;
+}
+
+/* BODY FONT STYLES */
+#new-label-font {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+}
+
+/* FOOTER STYLES */
+.footer {
+  background-color: #a1909057;
+  margin-top: auto;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+}
+
+/* MASONRY CARD STYLES */
+#mason {
+  visibility: hidden;
+}
+.mason_col {
+  width: 33%; /*3 columns*/
+}
+.imgblock {
+  transition: transform 0.2s ease-in-out;
+}
+.mason_card {
+  background-color: black;
+}
+.mason_card img:hover {
+  transform: scale(0.95);
+}
+#mason-card-font {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+#badge-label-font {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  color: white;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------- */
+
+@media only screen and (max-width: 720px) {
+  /* NAVBAR STYLES */
+  #nav-bar-full {
+    display: none;
+  }
+  #nav-bar-small {
+    display: contents;
+  }
+
+  /* MASONRY CARD STYLES */
+  .mason_col {
+    width: 50%; /*3 columns*/
+  }
+}
