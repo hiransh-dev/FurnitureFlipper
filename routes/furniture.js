@@ -2,13 +2,14 @@ const path = require("path");
 const express = require("express");
 const router = express.Router();
 
+const Furniture = require(path.join(__dirname, "../models/dbFurniture"));
+const { joiFurnitureSchema } = require(path.join(__dirname, "../joi_schema"));
+
 const catchAsync = require(path.join(__dirname, "../utils/catchAsync"));
 const expressError = require(path.join(__dirname, "../utils/ExpressError"));
 const timestampToday = require(path.join(__dirname, "../utils/timeFunc"));
 
-const Furniture = require(path.join(__dirname, "../models/dbFurniture"));
-
-const { joiFurnitureSchema } = require(path.join(__dirname, "../joi_schema"));
+const { checkLogin } = require(path.join(__dirname, "../middleware"));
 
 const validateFurnitureSchema = (req, res, next) => {
   const { error } = joiFurnitureSchema.validate(req.body);
@@ -30,15 +31,13 @@ router.get(
 );
 
 /* CREATE ROUTE */
-router.get(
-  "/new",
-  catchAsync(async (req, res) => {
-    res.render("furniture/new", { title: "New" });
-  })
-);
+router.get("/new", checkLogin, (req, res) => {
+  res.render("furniture/new", { title: "New" });
+});
 
 router.post(
   "/new",
+  checkLogin,
   validateFurnitureSchema,
   catchAsync(async (req, res) => {
     const new_furniture = new Furniture(req.body.furniture);
@@ -63,6 +62,7 @@ router.get(
 /* UPDATE ROUTE */
 router.get(
   "/:id/edit",
+  checkLogin,
   catchAsync(async (req, res) => {
     const selectedFurniture = await Furniture.findById(req.params.id);
     res.render("furniture/edit", { selectedFurniture, title: "Edit" });
@@ -71,6 +71,7 @@ router.get(
 
 router.put(
   "/:id",
+  checkLogin,
   validateFurnitureSchema,
   catchAsync(async (req, res, next) => {
     const edit_furniture = req.body.furniture;
@@ -87,6 +88,7 @@ router.put(
 /* DELETE ROUTE */
 router.delete(
   "/:id",
+  checkLogin,
   catchAsync(async (req, res) => {
     await Furniture.findByIdAndDelete(req.params.id);
     res.redirect("/furniture");

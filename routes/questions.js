@@ -2,14 +2,15 @@ const path = require("path");
 const express = require("express");
 const router = express.Router({ mergeParams: true }); //to get :id from furnitureRoute
 
+const Furniture = require(path.join(__dirname, "../models/dbFurniture"));
+const Questions = require(path.join(__dirname, "../models/dbQuestions"));
+const { joiQuestionsSchema } = require(path.join(__dirname, "../joi_schema"));
+
 const catchAsync = require(path.join(__dirname, "../utils/catchAsync"));
 const expressError = require(path.join(__dirname, "../utils/ExpressError"));
 const timestampToday = require(path.join(__dirname, "../utils/timeFunc"));
 
-const Furniture = require(path.join(__dirname, "../models/dbFurniture"));
-const Questions = require(path.join(__dirname, "../models/dbQuestions"));
-
-const { joiQuestionsSchema } = require(path.join(__dirname, "../joi_schema"));
+const { checkLogin } = require(path.join(__dirname, "../middleware"));
 
 const validateQuestionsSchema = (req, res, next) => {
   const { error } = joiQuestionsSchema.validate(req.body);
@@ -25,6 +26,7 @@ const validateQuestionsSchema = (req, res, next) => {
 router.post(
   "/",
   validateQuestionsSchema,
+  checkLogin,
   catchAsync(async (req, res) => {
     const selectedFurniture = await Furniture.findById(req.params.id);
     const new_question = new Questions(req.body.questions);
@@ -38,6 +40,7 @@ router.post(
 
 router.delete(
   "/:quesid",
+  checkLogin,
   catchAsync(async (req, res) => {
     await Furniture.findByIdAndUpdate(req.params.id, {
       $pull: { questions: req.params.quesid },

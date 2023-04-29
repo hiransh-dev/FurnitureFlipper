@@ -9,9 +9,18 @@
       </div>
       <div class="uk-navbar-right">
         <ul id="nav-bar-full" class="uk-navbar-nav">
-          <li><a id="nav-bar-font" href="/furniture/new">List with us</a></li>
-          <li><a id="nav-bar-font" href="#">Login</a></li>
+          <% if (!currentUser) { %>
+          <li><a id="nav-bar-font" href="/login">Login</a></li>
           <li><a id="nav-bar-font" href="/register">Register</a></li>
+          <% } else { %>
+          <li>
+            <a id="nav-bar-font" href="#" style="color: grey"
+              >HELLO <%= currentUser.firstName %></a
+            >
+          </li>
+          <li><a id="nav-bar-font" href="/logout">Logout</a></li>
+          <li><a id="nav-bar-font" href="/furniture/new">List with us</a></li>
+          <% } %>
           <li><a id="nav-bar-font" href="#">About us</a></li>
           <li><a id="nav-bar-font" href="#">Contact us</a></li>
         </ul>
@@ -28,12 +37,20 @@
               style="background-color: black"
             >
               <ul class="uk-nav uk-navbar-dropdown-nav">
+                <% if (!currentUser) { %>
+                <li><a id="nav-bar-font" href="/login">Login</a></li>
+                <li><a id="nav-bar-font" href="/register">Register</a></li>
+                <% } else { %>
+                <li>
+                  <a id="nav-bar-font" href="#" style="color: grey"
+                    >HELLO <%= currentUser.firstName.toUpperCase() %></a
+                  >
+                </li>
+                <li><a id="nav-bar-font" href="/logout">Logout</a></li>
                 <li>
                   <a id="nav-bar-font" href="/furniture/new">List with us</a>
                 </li>
-                <li class="uk-nav-divider"></li>
-                <li><a id="nav-bar-font" href="#">Login</a></li>
-                <li><a id="nav-bar-font" href="/register">Register</a></li>
+                <% } %>
                 <li class="uk-nav-divider"></li>
                 <li><a id="nav-bar-font" href="#">About us</a></li>
                 <li><a id="nav-bar-font" href="#">Contact us</a></li>

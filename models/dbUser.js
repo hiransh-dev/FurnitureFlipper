@@ -24,6 +24,9 @@ const UserSchema = new Schema({
   phoneNumber: {
     type: Number,
   },
+  creationDate: {
+    type: String,
+  },
 });
 
 UserSchema.virtual("fullName").get(function () {

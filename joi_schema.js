@@ -21,4 +21,15 @@ const joiQuestionsSchema = Joi.object({
   }).required(),
 });
 
-module.exports = { joiFurnitureSchema, joiQuestionsSchema };
+const joiUserSchema = Joi.object({
+  userRegister: Joi.object({
+    email: Joi.string().required(),
+    firstName: Joi.string().required(),
+    lastName: Joi.string().required(),
+    pwd: Joi.string().required(),
+    // username: Joi.string().allow(null, ""),
+    // username is commented because the validateJoi middleware funtion in app will be executed before timestamp is added through timeFunc, alternatively i could make it allowed but null
+  }).required(),
+});
+
+module.exports = { joiFurnitureSchema, joiQuestionsSchema, joiUserSchema };

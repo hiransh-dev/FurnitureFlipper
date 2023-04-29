@@ -3,15 +3,17 @@ const app = express();
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
+const flash = require("connect-flash");
+
+const mongoose = require("mongoose");
+const dbcon = require(path.join(__dirname, "/dbcon"));
 
 const session = require("express-session");
 const passport = require("passport");
 const passportLocal = require("passport-local");
 
-const mongoose = require("mongoose");
-const dbcon = require(path.join(__dirname, "/dbcon"));
-
 const User = require(path.join(__dirname, "/models/dbUser"));
+const { checkLogin } = require(path.join(__dirname, "/middleware"));
 
 const furnitureRoutes = require(path.join(__dirname, "/routes/furniture"));
 const questionsRoutes = require(path.join(__dirname, "/routes/questions"));
@@ -29,6 +31,7 @@ app.use(express.urlencoded({ extended: true })); //to read req.body.example in a
 app.use(methodOverride("_method"));
 
 app.use(express.static("public"));
+app.use(flash());
 
 const sessionConfig = {
   secret: "tempSecret",
@@ -45,9 +48,17 @@ app.use(session(sessionConfig));
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new passportLocal(User.authenticate())); //User.authenticate()
+passport.use(new passportLocal(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+app.use((req, res, next) => {
+  // if (req.session.returnURL) {
+  //   res.locals.returnURL = req.session.returnURL;
+  // } COMMENTED CAUSE IT BREAKS AT UPDATE/DELETE URLs
+  res.locals.currentUser = req.user;
+  next();
+});
 
 app.use("/", userRoutes);
 app.use("/furniture", furnitureRoutes);
