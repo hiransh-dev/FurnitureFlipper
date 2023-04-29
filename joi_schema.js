@@ -2,9 +2,9 @@ const Joi = require("joi");
 
 const joiFurnitureSchema = Joi.object({
   furniture: Joi.object({
-    title: Joi.string().required(),
-    price: Joi.number().required(),
-    desc: Joi.string().allow(null, ""),
+    title: Joi.string().min(1).max(20).required(),
+    price: Joi.number().min(1).max(4).positive().required(),
+    desc: Joi.string().min(1).max(100).allow(null, ""),
     imageurl: Joi.string().required(),
     location: Joi.string().allow(null, ""),
     // timestamp: Joi.string().required(),
@@ -14,8 +14,8 @@ const joiFurnitureSchema = Joi.object({
 
 const joiQuestionsSchema = Joi.object({
   questions: Joi.object({
-    ques: Joi.string().required(),
-    ans: Joi.string().allow(null, ""),
+    ques: Joi.string().min(1).max(60).required(),
+    ans: Joi.string().min(1).max(60).allow(null, ""),
     // timestamp: Joi.string().required(),
     // timestamp is commented because the validateJoi middleware funtion in app will be executed before timestamp is added through timeFunc, alternatively i could make it allowed but null
   }).required(),
@@ -23,9 +23,9 @@ const joiQuestionsSchema = Joi.object({
 
 const joiUserSchema = Joi.object({
   userRegister: Joi.object({
-    email: Joi.string().required(),
-    firstName: Joi.string().required(),
-    lastName: Joi.string().required(),
+    email: Joi.string().min(4).max(25).email().required(),
+    firstName: Joi.string().min(1).max(25).required(),
+    lastName: Joi.string().min(1).max(25).required(),
     pwd: Joi.string().required(),
     // username: Joi.string().allow(null, ""),
     // username is commented because the validateJoi middleware funtion in app will be executed before timestamp is added through timeFunc, alternatively i could make it allowed but null

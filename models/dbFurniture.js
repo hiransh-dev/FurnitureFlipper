@@ -12,6 +12,10 @@ const FurnitureSchema = new Schema({
   imageurl: String,
   //images array
   timestamp: String,
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
   questions: [
     {
       type: Schema.Types.ObjectId,
