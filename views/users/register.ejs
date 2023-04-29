@@ -1,0 +1,12 @@
+<% layout('./layouts/boilerplate') %>
+<form action="/register" method="POST">
+  <label for="firstName">Firstname</label>
+  <input type="text" id="firstName" name="userRegister[firstName]" />
+  <label for="lastName">Lastname</label>
+  <input type="text" id="lastName" name="userRegister[lastName]" />
+  <label for="email">Email</label>
+  <input type="text" id="email" name="userRegister[email]" />
+  <label for="password">Password</label>
+  <input type="password" id="password" name="userRegister[pwd]" />
+  <button type="submit">Submit</button>
+</form>

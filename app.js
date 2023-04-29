@@ -4,12 +4,18 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 
+const session = require("express-session");
+const passport = require("passport");
+const passportLocal = require("passport-local");
+
 const mongoose = require("mongoose");
 const dbcon = require(path.join(__dirname, "/dbcon"));
+
 const User = require(path.join(__dirname, "/models/dbUser"));
 
 const furnitureRoutes = require(path.join(__dirname, "/routes/furniture"));
 const questionsRoutes = require(path.join(__dirname, "/routes/questions"));
+const userRoutes = require(path.join(__dirname, "/routes/user"));
 
 const expressError = require(path.join(__dirname, "/utils/ExpressError"));
 const catchAsync = require(path.join(__dirname, "/utils/catchAsync"));
@@ -24,6 +30,26 @@ app.use(methodOverride("_method"));
 
 app.use(express.static("public"));
 
+const sessionConfig = {
+  secret: "tempSecret",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // + (milliseconds*seconds*minutes*hours*days) 1 week
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  },
+  // store:
+};
+app.use(session(sessionConfig));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new passportLocal(User.authenticate())); //User.authenticate()
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use("/", userRoutes);
 app.use("/furniture", furnitureRoutes);
 app.use("/furniture/:id/questions", questionsRoutes);
 
