@@ -2,37 +2,53 @@
 <img src="<%= selectedFurniture.imageurl %>" />
 <label><%= selectedFurniture.title %></label>
 <label><%= selectedFurniture.desc %></label>
-<a href="/furniture/<%= selectedFurniture._id %>/edit/">Edit</a>
+<!-- fullName used is not a DB property but a virtual of firstName & lastName -->
+<label><%= selectedFurniture.author.fullName %></label>
 
-<form
-  action="/furniture/<%= selectedFurniture._id %>?_method=DELETE"
-  method="POST"
->
-  <button type="submit">Delete</button>
-  <!-- make this trigger an alertbox to confirm later -->
-</form>
+<% if (currentUser && selectedFurniture.author.equals(currentUser._id)) { %>
+<div>
+  <a href="/furniture/<%= selectedFurniture._id %>/edit/">Edit</a>
+  <form
+    action="/furniture/<%= selectedFurniture._id %>?_method=DELETE"
+    method="POST"
+  >
+    <button type="submit">Delete</button>
+    <!-- make this trigger an alertbox to confirm later -->
+  </form>
+</div>
+<% } %>
 
 <h1>All Questions</h1>
-<% for( let question of selectedFurniture.questions) {%>
+<% for( let question of selectedFurniture.questions) { %>
+<label>Posted by: <%= question.author.fullName %></label><br />
 <label>Question: <%= question.ques %></label>
+<form
+  action="/furniture/<%= selectedFurniture._id %>/questions/<%= question._id %>/answer?_method=PUT"
+  method="post"
+>
+  <% if (!question.ans && currentUser &&
+  selectedFurniture.author.equals(currentUser._id)) { %>
+  <textarea name="questions[ans]" id="question"></textarea>
+  <button type="submit">Submit Answer</button>
+  <% } %>
+</form>
+
 <label>Answer: <%= question.ans %></label><br />
 <form
   action="/furniture/<%= selectedFurniture._id %>/questions/<%= question._id %>?_method=DELETE"
   method="POST"
 >
+  <% if (currentUser && question.author._id.equals(currentUser._id)) {%>
   <button type="submit">Delete Question</button>
+  <% } %>
 </form>
-<% } %>
 
-<!-- NEEDS SERIOUS AUTHENTICATION TWEAKS -->
+<% } %> <% if (currentUser &&
+(selectedFurniture.author.equals(currentUser._id)===false)) { %>
 <h1>Ask any Questions</h1>
 <form action="/furniture/<%= selectedFurniture._id %>/questions" method="POST">
-  <!-- only show for users & not OP -->
   <label>Question</label>
   <textarea name="questions[ques]" id="question"></textarea>
-  <!-- only show for OP -->
-  <label>Answer</label>
-  <textarea name="questions[ans]" id="answer"></textarea>
   <button type="submit">Submit</button>
-  <!-- Authenticate to delete answer later -->
 </form>
+<% } %>

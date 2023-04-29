@@ -9,7 +9,7 @@ const catchAsync = require(path.join(__dirname, "../utils/catchAsync"));
 const expressError = require(path.join(__dirname, "../utils/ExpressError"));
 const timestampToday = require(path.join(__dirname, "../utils/timeFunc"));
 
-const { checkLogin } = require(path.join(__dirname, "../middleware"));
+const { checkLogin, isAuthor } = require("../middleware");
 
 const validateFurnitureSchema = (req, res, next) => {
   const { error } = joiFurnitureSchema.validate(req.body);
@@ -42,6 +42,7 @@ router.post(
   catchAsync(async (req, res) => {
     const new_furniture = new Furniture(req.body.furniture);
     new_furniture.timestamp = timestampToday;
+    new_furniture.author = req.user._id;
     await new_furniture.save();
     res.redirect("/furniture/" + new_furniture._id);
   })
@@ -51,10 +52,15 @@ router.post(
 router.get(
   "/:id",
   catchAsync(async (req, res) => {
-    const selectedFurniture = await Furniture.findById(req.params.id).populate({
-      path: "questions",
-      options: { sort: { _id: -1 } },
-    }); /*can pupulate directly but needed options, sort here*/
+    const selectedFurniture = await Furniture.findById(req.params.id)
+      .populate("author")
+      .populate({
+        path: "questions",
+        populate: {
+          path: "author",
+        },
+        options: { sort: { _id: -1 } },
+      }); /*can pupulate directly but needed options, sort here*/
     res.render("furniture/show", { selectedFurniture, title: "View" });
   })
 );
@@ -63,6 +69,7 @@ router.get(
 router.get(
   "/:id/edit",
   checkLogin,
+  isAuthor,
   catchAsync(async (req, res) => {
     const selectedFurniture = await Furniture.findById(req.params.id);
     res.render("furniture/edit", { selectedFurniture, title: "Edit" });
@@ -72,14 +79,15 @@ router.get(
 router.put(
   "/:id",
   checkLogin,
+  isAuthor,
   validateFurnitureSchema,
   catchAsync(async (req, res, next) => {
-    const edit_furniture = req.body.furniture;
+    const edited_furniture = req.body.furniture;
     await Furniture.findByIdAndUpdate(req.params.id, {
-      title: edit_furniture.title,
-      price: edit_furniture.price,
-      imageurl: edit_furniture.imageurl,
-      desc: edit_furniture.desc,
+      title: edited_furniture.title,
+      price: edited_furniture.price,
+      imageurl: edited_furniture.imageurl,
+      desc: edited_furniture.desc,
     });
     res.redirect(`/furniture/${req.params.id}`);
   })
@@ -89,6 +97,7 @@ router.put(
 router.delete(
   "/:id",
   checkLogin,
+  isAuthor,
   catchAsync(async (req, res) => {
     await Furniture.findByIdAndDelete(req.params.id);
     res.redirect("/furniture");

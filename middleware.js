@@ -1,3 +1,7 @@
+const path = require("path");
+const Furniture = require(path.join(__dirname, "/models/dbFurniture"));
+const Questions = require(path.join(__dirname, "/models/dbQuestions"));
+
 const checkLogin = (req, res, next) => {
   if (!req.isAuthenticated()) {
     // ENTER FLASH LATER
@@ -15,4 +19,22 @@ const LoggedinTrue = (req, res, next) => {
   next();
 };
 
-module.exports = { checkLogin, LoggedinTrue };
+const isAuthor = async (req, res, next) => {
+  const foundFurniture = await Furniture.findById(req.params.id);
+  if (!foundFurniture.author.equals(req.user._id)) {
+    // add flash message later
+    return res.redirect("/furniture/" + req.params.id);
+  }
+  next();
+};
+
+const isQuestionAuthor = async (req, res, next) => {
+  const foundQuestion = await Questions.findById(req.params.quesid);
+  if (foundQuestion && !foundQuestion.author.equals(req.user._id)) {
+    // add flash message later
+    return res.redirect("/furniture/" + req.params.id);
+  }
+  next();
+};
+
+module.exports = { checkLogin, LoggedinTrue, isAuthor, isQuestionAuthor };

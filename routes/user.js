@@ -1,12 +1,13 @@
 const path = require("path");
 const express = require("express");
 const passport = require("passport");
-const { checkLogin, LoggedinTrue } = require("../middleware");
 const router = express.Router();
 
 const catchAsync = require(path.join(__dirname, "../utils/catchAsync"));
 const expressError = require(path.join(__dirname, "../utils/ExpressError"));
 const timestampToday = require(path.join(__dirname, "../utils/timeFunc"));
+
+const { checkLogin, LoggedinTrue } = require("../middleware");
 
 const User = require(path.join(__dirname, "../models/dbUser"));
 const { joiUserSchema } = require(path.join(__dirname, "../joi_schema"));

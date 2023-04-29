@@ -2,8 +2,8 @@ const Joi = require("joi");
 
 const joiFurnitureSchema = Joi.object({
   furniture: Joi.object({
-    title: Joi.string().min(1).max(20).required(),
-    price: Joi.number().min(1).max(4).positive().required(),
+    title: Joi.string().min(1).max(30).required(),
+    price: Joi.number().min(1).max(9999).positive().precision(2).required(),
     desc: Joi.string().min(1).max(100).allow(null, ""),
     imageurl: Joi.string().required(),
     location: Joi.string().allow(null, ""),

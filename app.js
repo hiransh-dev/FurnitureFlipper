@@ -13,15 +13,15 @@ const passport = require("passport");
 const passportLocal = require("passport-local");
 
 const User = require(path.join(__dirname, "/models/dbUser"));
-const { checkLogin } = require(path.join(__dirname, "/middleware"));
+// const { checkLogin } = require(path.join(__dirname, "/middleware"));
 
 const furnitureRoutes = require(path.join(__dirname, "/routes/furniture"));
 const questionsRoutes = require(path.join(__dirname, "/routes/questions"));
 const userRoutes = require(path.join(__dirname, "/routes/user"));
 
 const expressError = require(path.join(__dirname, "/utils/ExpressError"));
-const catchAsync = require(path.join(__dirname, "/utils/catchAsync"));
-const timestampToday = require(path.join(__dirname, "/utils/timeFunc"));
+// const catchAsync = require(path.join(__dirname, "/utils/catchAsync"));
+// const timestampToday = require(path.join(__dirname, "/utils/timeFunc"));
 
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
