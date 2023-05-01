@@ -8,6 +8,9 @@
   <legend id="new-label-font" class="uk-legend">
     List your used Furniture with us
   </legend>
+  <div id="map"></div>
+  <input type="hidden" name="furniture[lat]" id="latitude" />
+  <input type="hidden" name="furniture[lng]" id="longitude" />
   <div class="uk-margin">
     <label id="new-label-font" class="uk-form-label" for="furniture[title]"
       >Title</label
@@ -63,3 +66,5 @@
     </div>
   </div>
 </form>
+
+<script src="/js/setmaplocation.js"></script>

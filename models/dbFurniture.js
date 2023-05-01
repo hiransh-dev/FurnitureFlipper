@@ -8,7 +8,8 @@ const FurnitureSchema = new Schema({
   title: String,
   price: Number,
   desc: String,
-  location: String,
+  lat: Number,
+  lng: Number,
   imageurl: [
     {
       url: String,

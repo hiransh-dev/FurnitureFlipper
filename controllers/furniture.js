@@ -33,7 +33,7 @@ module.exports.read = async (req, res) => {
         path: "author",
       },
       options: { sort: { _id: -1 } },
-    }); /*can pupulate directly but needed options, sort here*/
+    }); /*can populate directly but needed options, sort here*/
   res.render("furniture/show", { selectedFurniture, title: "View" });
 };
 
