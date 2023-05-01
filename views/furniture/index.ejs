@@ -1,37 +1,56 @@
-<% layout('./layouts/boilerplate') %>
+<% layout('./layouts/boilerplate'); let i =0;%>
+<div id="map"></div>
 <div id="mason" data-masonry='{"percentPosition": true }'>
-  <% for(let furniture of all_furniture){%>
+  <% for(let furniture of all_furniture){ %>
   <div class="mason_col">
     <!-- style="width: 33%" -->
     <div class="uk-card mason_card">
-      <a href="furniture/<%= furniture._id %>" class="uk-text-decoration-none">
+      <a
+        id="linkTo<%= i %>"
+        href="furniture/<%= furniture._id %>"
+        class="uk-text-decoration-none"
+      >
+        <input
+          type="hidden"
+          value="<%= furniture.lat %>"
+          id="latitude<%= i %>"
+          readonly
+        />
+        <input
+          type="hidden"
+          value="<%= furniture.lng %>"
+          id="longitude<%= i %>"
+          readonly
+        />
         <img
           id="mason_img"
           class="uk-card-media-top imgblock"
           src="<%= furniture.imageurl[0].url %> "
+          onload="addingToMap()"
         />
         <div class="uk-card-body">
           <div id="badge-label-font" class="uk-card-badge uk-label-warning">
             £ <%= furniture.price %>
           </div>
-          <p class="uk-card-title">
-            <label id="mason-card-font"> <%= furniture.title %> </label>
+          <p class="uk-card-title mason-card-font">
+            <label class="" id="title<%= i %>"> <%= furniture.title %> </label>
           </p>
         </div>
       </a>
     </div>
   </div>
-  <% } %>
+  <% i++;} %>
 </div>
 
+<script src="/js/getmaplocation_many.js"></script>
+
+<script src="/js/imagesloaded.pkgd.min.js"></script>
 <script
   src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
   integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
   crossorigin="anonymous"
   async
 ></script>
-
-<script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 <script>
   const gridMason = document.querySelector("#mason");
   const varMason = function createMasonLayout() {

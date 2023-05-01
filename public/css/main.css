@@ -96,7 +96,7 @@ body {
 .mason_card img:hover {
   transform: scale(0.95);
 }
-#mason-card-font {
+.mason-card-font {
   font-family: "Montserrat", sans-serif;
   font-size: 1.2rem;
   text-decoration: none;

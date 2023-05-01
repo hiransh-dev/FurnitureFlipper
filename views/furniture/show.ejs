@@ -55,7 +55,17 @@ selectedFurniture.imageurl) {%>
 </form>
 <% } %>
 <div id="map"></div>
-<input type="hidden" value="<%= selectedFurniture.lat %>" id="latitude" />
-<input type="hidden" value="<%= selectedFurniture.lng %>" id="longitude" />
+<input
+  type="hidden"
+  value="<%= selectedFurniture.lat %>"
+  id="latitude"
+  readonly
+/>
+<input
+  type="hidden"
+  value="<%= selectedFurniture.lng %>"
+  id="longitude"
+  readonly
+/>
 
 <script src="/js/getmaplocation.js"></script>
