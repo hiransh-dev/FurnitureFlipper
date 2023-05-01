@@ -5,7 +5,7 @@ const joiFurnitureSchema = Joi.object({
     title: Joi.string().min(1).max(30).required(),
     price: Joi.number().min(1).max(9999).positive().precision(2).required(),
     desc: Joi.string().min(1).max(100).allow(null, ""),
-    imageurl: Joi.string().required(),
+    // imageurl: Joi.string().required(),
     location: Joi.string().allow(null, ""),
     // timestamp: Joi.string().required(),
     // timestamp is commented because the validateJoi middleware funtion in app will be executed before timestamp is added through timeFunc, alternatively i could make it allowed but null

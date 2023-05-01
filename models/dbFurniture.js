@@ -9,7 +9,12 @@ const FurnitureSchema = new Schema({
   price: Number,
   desc: String,
   location: String,
-  imageurl: String,
+  imageurl: [
+    {
+      url: String,
+      filename: String,
+    },
+  ],
   //images array
   timestamp: String,
   author: {

@@ -16,6 +16,10 @@ module.exports.new = async (req, res) => {
   const new_furniture = new Furniture(req.body.furniture);
   new_furniture.timestamp = timestampToday;
   new_furniture.author = req.user._id;
+  new_furniture.imageurl = req.files.map((f) => ({
+    url: f.path,
+    filename: f.filename,
+  }));
   await new_furniture.save();
   res.redirect("/furniture/" + new_furniture._id);
 };
@@ -40,12 +44,18 @@ module.exports.renderEdit = async (req, res) => {
 
 module.exports.update = async (req, res, next) => {
   const edited_furniture = req.body.furniture;
-  await Furniture.findByIdAndUpdate(req.params.id, {
+  const newEdit_furniture = await Furniture.findByIdAndUpdate(req.params.id, {
     title: edited_furniture.title,
     price: edited_furniture.price,
-    imageurl: edited_furniture.imageurl,
+    // imageurl: edited_furniture.imageurl,
     desc: edited_furniture.desc,
   });
+  const newimgs = req.files.map((f) => ({
+    url: f.path,
+    filename: f.filename,
+  }));
+  newEdit_furniture.imageurl.push(...newimgs);
+  newEdit_furniture.save();
   res.redirect(`/furniture/${req.params.id}`);
 };
 

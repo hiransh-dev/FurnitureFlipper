@@ -3,6 +3,7 @@
   class="uk-container uk-container-xsmall uk-align-center uk-form-horizontal"
   action="/furniture/<%= selectedFurniture._id %>/edit?_method=PUT"
   method="POST"
+  enctype="multipart/form-data"
 >
   <legend id="new-label-font" class="uk-legend">
     Edit your Furniture listed with us
@@ -36,13 +37,14 @@
     <label id="new-label-font" class="uk-form-label" for="furniture[imageurl]"
       >Image Upload</label
     >
-    <input
+    <!-- <input
       class="uk-input uk-form-width-large"
       type="text"
       placeholder="Image URL"
       name="furniture[imageurl]"
-      value="<%= selectedFurniture.imageurl %>"
-    />
+      
+    /> -->
+    <input type="file" name="furniture[imageurl]" multiple />
   </div>
   <div class="uk-margin">
     <label id="new-label-font" class="uk-form-label" for="furniture[desc]"

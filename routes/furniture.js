@@ -6,6 +6,10 @@ const furnitureController = require("../controllers/furniture");
 const Furniture = require(path.join(__dirname, "../models/dbFurniture"));
 const { joiFurnitureSchema } = require(path.join(__dirname, "../joi_schema"));
 
+const { storage } = require("../cloudinary");
+const multer = require("multer");
+const upload = multer({ storage });
+
 const catchAsync = require(path.join(__dirname, "../utils/catchAsync"));
 const expressError = require(path.join(__dirname, "../utils/ExpressError"));
 const timestampToday = require(path.join(__dirname, "../utils/timeFunc"));
@@ -31,6 +35,7 @@ router
   .get(checkLogin, furnitureController.renderNew)
   .post(
     checkLogin,
+    upload.array("furniture[imageurl]"),
     validateFurnitureSchema,
     catchAsync(furnitureController.new)
   );
@@ -49,6 +54,7 @@ router
   .put(
     checkLogin,
     isAuthor,
+    upload.array("furniture[imageurl]"),
     validateFurnitureSchema,
     catchAsync(furnitureController.update)
   );

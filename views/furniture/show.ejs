@@ -1,5 +1,7 @@
-<% layout('./layouts/boilerplate') %>
-<img src="<%= selectedFurniture.imageurl %>" />
+<% layout('./layouts/boilerplate') %> <% for(let img of
+selectedFurniture.imageurl) {%>
+<img src="<%= img.url %>" />
+<% } %>
 <label><%= selectedFurniture.title %></label>
 <label><%= selectedFurniture.desc %></label>
 <!-- fullName used is not a DB property but a virtual of firstName & lastName -->
