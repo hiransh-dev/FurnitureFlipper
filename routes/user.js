@@ -3,14 +3,15 @@ const express = require("express");
 const passport = require("passport");
 const router = express.Router();
 
+const userController = require("../controllers/user");
+const User = require(path.join(__dirname, "../models/dbUser"));
+const { joiUserSchema } = require(path.join(__dirname, "../joi_schema"));
+
 const catchAsync = require(path.join(__dirname, "../utils/catchAsync"));
 const expressError = require(path.join(__dirname, "../utils/ExpressError"));
 const timestampToday = require(path.join(__dirname, "../utils/timeFunc"));
 
 const { checkLogin, LoggedinTrue } = require("../middleware");
-
-const User = require(path.join(__dirname, "../models/dbUser"));
-const { joiUserSchema } = require(path.join(__dirname, "../joi_schema"));
 
 const validateUserSchema = (req, res, next) => {
   const { error } = joiUserSchema.validate(req.body);
@@ -23,54 +24,25 @@ const validateUserSchema = (req, res, next) => {
 };
 
 // REGISTER ROUTES
-router.get("/register", LoggedinTrue, (req, res) => {
-  res.render("users/register", { title: "Register" });
-});
-
-router.post(
-  "/register",
-  LoggedinTrue,
-  validateUserSchema,
-  catchAsync(async (req, res) => {
-    const { email, firstName, lastName, pwd } = req.body.userRegister;
-    const new_user = new User({ email, firstName, lastName });
-    new_user.username = email;
-    new_user.timestamp = timestampToday;
-    const createdUser = await User.register(new_user, pwd);
-    // console.log(createdUser);
-    res.redirect("/login");
-  })
-);
+router
+  .route("/register")
+  .get(LoggedinTrue, userController.renderRegister)
+  .post(LoggedinTrue, validateUserSchema, catchAsync(userController.register));
 
 // LOGIN ROUTES
-router.get("/login", LoggedinTrue, (req, res) => {
-  res.render("users/login", { title: "Login" });
-});
-
-router.post(
-  "/login",
-  LoggedinTrue,
-  passport.authenticate("local", {
-    failureFlash: true,
-    failureRedirect: "/login",
-  }),
-  (req, res) => {
-    // if (res.locals.returnURL) {
-    //   return res.redirect(res.locals.returnURL);
-    // } COMMENTED CAUSE IT BREAKS AT UPDATE/DELETE URLs
-    res.redirect("/furniture");
-  }
-);
+router
+  .route("/login")
+  .get(LoggedinTrue, userController.renderLogin)
+  .post(
+    LoggedinTrue,
+    passport.authenticate("local", {
+      failureFlash: true,
+      failureRedirect: "/login",
+    }),
+    userController.login
+  );
 
 // LOGOUT ROUTES
-router.get("/logout", checkLogin, (req, res) => {
-  req.logout(function (err) {
-    if (err) {
-      return next(err);
-    }
-    // req.flash("success", "Goodbye!");
-    res.redirect("/");
-  });
-});
+router.get("/logout", checkLogin, userController.logout);
 
 module.exports = router;
