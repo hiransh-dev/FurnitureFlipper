@@ -32,13 +32,16 @@ app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+// TO SANITIZE MONGO QUERIES IN URL
 app.use(mongoSanitize());
-// app.use(helmet());
+// FOR CONTENT SECURITY POLICY & MORE SECURITY HEADERS
+app.use(helmet());
 const scriptSrcUrls = [
   "https://cdnjs.cloudflare.com/",
   "https://cdn.jsdelivr.net",
   "https://unpkg.com",
   "https://tile.openstreetmap.org",
+  "https://*.tile.openstreetmap.org",
 ];
 const styleSrcUrls = [
   "https://fonts.googleapis.com/",
@@ -46,6 +49,7 @@ const styleSrcUrls = [
   "https://unpkg.com",
   "https://fonts.gstatic.com",
   "https://tile.openstreetmap.org",
+  "https://*.tile.openstreetmap.org",
 ];
 const connectSrcUrls = [
   "https://api.openstreetmap.org/",
@@ -54,12 +58,19 @@ const connectSrcUrls = [
   "https://fonts.googleapis.com/",
   "https://fonts.gstatic.com",
   "https://tile.openstreetmap.org",
+  "https://*.tile.openstreetmap.org",
 ];
 const fontSrcUrls = [
   "https://fonts.googleapis.com/",
   "https://fonts.gstatic.com",
   "https://unpkg.com",
+  "https://tile.openstreetmap.org",
+  "https://*.tile.openstreetmap.org",
 ];
+app.use(
+  helmet.crossOriginResourcePolicy({ policy: "cross-origin" }),
+  helmet.crossOriginEmbedderPolicy({ policy: "credentialless" })
+);
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
@@ -82,7 +93,9 @@ app.use(
         "https://res.cloudinary.com/dfkwwqgdx/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
         "https://images.unsplash.com/",
         "https://tile.openstreetmap.org",
+        "https://*.tile.openstreetmap.org",
         "https://unpkg.com",
+        "openstreetmap.org",
       ],
       fontSrc: ["'self'", ...fontSrcUrls],
     },

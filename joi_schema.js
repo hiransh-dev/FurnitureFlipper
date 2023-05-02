@@ -1,7 +1,7 @@
 const BaseJoi = require("joi");
 const sanitizeHtml = require("sanitize-html");
 
-// GOT DIRECTLY FROM SOURCE
+// GOT DIRECTLY FROM SOURCE TO AVOID HTML IN DB
 const extension = (joi) => ({
   type: "string",
   base: joi.string(),
