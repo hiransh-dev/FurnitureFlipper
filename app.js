@@ -16,20 +16,78 @@ const session = require("express-session");
 const passport = require("passport");
 const passportLocal = require("passport-local");
 
+/*NEED USER MODEL FOR PASSPORT AUTHENTICATION*/
 const User = require(path.join(__dirname, "/models/dbUser"));
-// const { checkLogin } = require(path.join(__dirname, "/middleware"));
 
 const furnitureRoutes = require(path.join(__dirname, "/routes/furniture"));
 const questionsRoutes = require(path.join(__dirname, "/routes/questions"));
 const userRoutes = require(path.join(__dirname, "/routes/user"));
 
 const expressError = require(path.join(__dirname, "/utils/ExpressError"));
-// const catchAsync = require(path.join(__dirname, "/utils/catchAsync"));
-// const timestampToday = require(path.join(__dirname, "/utils/timeFunc"));
+
+const mongoSanitize = require("express-mongo-sanitize");
+const helmet = require("helmet");
 
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+
+app.use(mongoSanitize());
+// app.use(helmet());
+const scriptSrcUrls = [
+  "https://cdnjs.cloudflare.com/",
+  "https://cdn.jsdelivr.net",
+  "https://unpkg.com",
+  "https://tile.openstreetmap.org",
+];
+const styleSrcUrls = [
+  "https://fonts.googleapis.com/",
+  "https://cdn.jsdelivr.net",
+  "https://unpkg.com",
+  "https://fonts.gstatic.com",
+  "https://tile.openstreetmap.org",
+];
+const connectSrcUrls = [
+  "https://api.openstreetmap.org/",
+  "https://cdn.jsdelivr.net",
+  "https://unpkg.com",
+  "https://fonts.googleapis.com/",
+  "https://fonts.gstatic.com",
+  "https://tile.openstreetmap.org",
+];
+const fontSrcUrls = [
+  "https://fonts.googleapis.com/",
+  "https://fonts.gstatic.com",
+  "https://unpkg.com",
+];
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      connectSrc: ["'self'", "'unsafe-inline'", ...connectSrcUrls],
+      scriptSrc: [
+        "'unsafe-inline'",
+        "'self'",
+        "'unsafe-eval'",
+        ...scriptSrcUrls,
+      ],
+      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+      workerSrc: ["'self'", "blob:"],
+      objectSrc: [],
+      imgSrc: [
+        "'self'",
+        "blob:",
+        "data:",
+        "'unsafe-inline'",
+        "https://res.cloudinary.com/dfkwwqgdx/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
+        "https://images.unsplash.com/",
+        "https://tile.openstreetmap.org",
+        "https://unpkg.com",
+      ],
+      fontSrc: ["'self'", ...fontSrcUrls],
+    },
+  })
+);
 
 app.use(express.urlencoded({ extended: true })); //to read req.body.example in app.post for POST methods
 app.use(methodOverride("_method"));
@@ -38,11 +96,13 @@ app.use(express.static("public"));
 app.use(flash());
 
 const sessionConfig = {
+  name: "session" /* NOT REQUIRED, JUST TO CHANGE SESSION NAME */,
   secret: "tempSecret",
   resave: false,
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
+    // secure: true,
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // + (milliseconds*seconds*minutes*hours*days) 1 week
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },

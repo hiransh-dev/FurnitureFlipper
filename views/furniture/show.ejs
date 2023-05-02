@@ -1,6 +1,6 @@
 <% layout('./layouts/boilerplate') %> <% for(let img of
 selectedFurniture.imageurl) {%>
-<img src="<%= img.url %>" />
+<img src="<%= img.url %>" crossorigin="anonymous" />
 <% } %>
 <label><%= selectedFurniture.title %></label>
 <label><%= selectedFurniture.desc %></label>

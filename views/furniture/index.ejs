@@ -26,7 +26,7 @@
           id="mason_img"
           class="uk-card-media-top imgblock"
           src="<%= furniture.imageurl[0].url %> "
-          onload="addingToMap()"
+          crossorigin="anonymous"
         />
         <div class="uk-card-body">
           <div id="badge-label-font" class="uk-card-badge uk-label-warning">
@@ -42,15 +42,10 @@
   <% i++;} %>
 </div>
 
-<script src="/js/getmaplocation_many.js"></script>
-
+<script src="/js/mainIndex.js"></script>
+<script src="/js/masonry.pkgd.min.js"></script>
 <script src="/js/imagesloaded.pkgd.min.js"></script>
-<script
-  src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
-  integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
-  crossorigin="anonymous"
-  async
-></script>
+
 <script>
   const gridMason = document.querySelector("#mason");
   const varMason = function createMasonLayout() {
