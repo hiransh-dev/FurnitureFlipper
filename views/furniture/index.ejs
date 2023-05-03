@@ -1,5 +1,11 @@
 <% layout('./layouts/boilerplate'); let i =0;%>
+<div class="uk-margin">
+  <label class="header-label">Find Furnitures listed near you from Map</label>
+</div>
 <div id="map"></div>
+<div class="uk-margin">
+  <label class="header-label">Recently Listed</label>
+</div>
 <div id="mason" data-masonry='{"percentPosition": true }'>
   <% for(let furniture of all_furniture){ %>
   <div class="mason_col">

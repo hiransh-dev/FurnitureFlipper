@@ -28,6 +28,10 @@
 }
 
 @media only screen and (max-width: 860px) {
+  .header-label {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.8rem;
+  }
   #home-inner-div {
     display: flex;
     flex-direction: column;

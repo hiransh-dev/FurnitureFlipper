@@ -8,6 +8,11 @@ body {
   background-color: #eeeaea;
 }
 
+.header-label {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.4rem;
+}
+
 #map {
   height: 50vh;
 }
@@ -94,6 +99,11 @@ body {
   }
   #nav-bar-small {
     display: contents;
+  }
+
+  .header-label {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.8rem;
   }
 
   /* MASONRY CARD STYLES */
