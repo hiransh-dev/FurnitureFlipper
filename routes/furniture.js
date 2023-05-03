@@ -6,9 +6,15 @@ const furnitureController = require("../controllers/furniture");
 const Furniture = require(path.join(__dirname, "../models/dbFurniture"));
 const { joiFurnitureSchema } = require(path.join(__dirname, "../joi_schema"));
 
-const { storage } = require("../cloudinary");
 const multer = require("multer");
-const upload = multer({ storage });
+
+// ENABLE THIS FOR LOCAL STORAGE
+const upload = multer({ dest: "public/temp/uploads/" });
+
+// ENABLE THIS FOR CLOUDINARY STORAGE, WHEN DEPLOYED.
+// const { storage } = require("../cloudinary");
+// const upload = multer({ storage });
+//
 
 const catchAsync = require(path.join(__dirname, "../utils/catchAsync"));
 const expressError = require(path.join(__dirname, "../utils/ExpressError"));
@@ -35,7 +41,7 @@ router
   .get(checkLogin, furnitureController.renderNew)
   .post(
     checkLogin,
-    upload.array("furniture[imageurl]"),
+    upload.array("furniture[imageurl]", 4),
     validateFurnitureSchema,
     catchAsync(furnitureController.new)
   );

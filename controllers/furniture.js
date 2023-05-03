@@ -17,7 +17,10 @@ module.exports.new = async (req, res) => {
   new_furniture.timestamp = timestampToday;
   new_furniture.author = req.user._id;
   new_furniture.imageurl = req.files.map((f) => ({
-    url: f.path,
+    // ENABLE THIS FOR CLOUDINARY STORAGE, WHEN DEPLOYED.
+    // url: f.path,
+    // REMOVE THIS FOR CLOUDINARY STORAGE, WHEN DEPLOYED.
+    url: "/temp/uploads/" + f.filename,
     filename: f.filename,
   }));
   await new_furniture.save();

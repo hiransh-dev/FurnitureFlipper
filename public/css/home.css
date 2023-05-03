@@ -1,0 +1,24 @@
+/* HOMEPAGE STYLES */
+#home-inner-div {
+  height: 100%;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+}
+.flex-container-div {
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* inline center in h1 text of Welcome to Furniture Flipper */
+}
+.image-container-div {
+  width: 50vw;
+}
+#homepage-img {
+  width: 50vw;
+  max-height: auto;
+  object-fit: cover;
+  background-size: cover;
+}

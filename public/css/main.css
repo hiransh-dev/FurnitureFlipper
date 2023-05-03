@@ -5,10 +5,11 @@ body {
   margin-bottom: 2vh;
   display: flex;
   flex-direction: column;
+  background-color: #ece2e2;
 }
 
 #map {
-  height: 180px;
+  height: 50vh;
 }
 
 /* NAVBAR STYLES */
@@ -38,38 +39,12 @@ body {
 .main-class {
   margin-top: 0vh;
   margin-bottom: 2vh;
-  margin-left: 0vh;
 }
 
 /* BODY FONT STYLES */
 #new-label-font {
   font-family: "Montserrat", sans-serif;
   font-size: 1.2rem;
-}
-
-/* HOMEPAGE STYLES */
-#home-inner-div {
-  height: 100%;
-  top: 0;
-  display: flex;
-  flex-direction: row;
-}
-.flex-container-div {
-  width: 50vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* inline center in h1 text of Welcome to Furniture Flipper */
-}
-.image-container-div {
-  width: 50vw;
-}
-#homepage-img {
-  width: 50vw;
-  max-height: auto;
-  object-fit: cover;
-  background-size: cover;
 }
 
 /* FOOTER STYLES */
@@ -111,7 +86,7 @@ body {
 
 /* ------------------------------------------------------------------------------------------------------------------------------------- */
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 860px) {
   /* NAVBAR STYLES */
   #nav-bar-full {
     display: none;

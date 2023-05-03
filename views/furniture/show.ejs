@@ -1,71 +1,225 @@
-<% layout('./layouts/boilerplate') %> <% for(let img of
-selectedFurniture.imageurl) {%>
-<img src="<%= img.url %>" crossorigin="anonymous" />
-<% } %>
-<label><%= selectedFurniture.title %></label>
-<label><%= selectedFurniture.desc %></label>
-<!-- fullName used is not a DB property but a virtual of firstName & lastName -->
-<label><%= selectedFurniture.author.fullName %></label>
-
-<% if (currentUser && selectedFurniture.author.equals(currentUser._id)) { %>
-<div>
-  <a href="/furniture/<%= selectedFurniture._id %>/edit/">Edit</a>
-  <form
-    action="/furniture/<%= selectedFurniture._id %>?_method=DELETE"
-    method="POST"
+<% layout('./layouts/boilerplate') %>
+<link rel="stylesheet" href="/css/show.css" />
+<div class="show-flex">
+  <div
+    class="uk-position-relative"
+    uk-slideshow="animation: push; ratio: false"
   >
-    <button type="submit">Delete</button>
-    <!-- make this trigger an alertbox to confirm later -->
-  </form>
+    <ul class="show-img-full uk-slideshow-items">
+      <% for(let img of selectedFurniture.imageurl) {%>
+      <li>
+        <div class="" uk-lightbox>
+          <!-- LIGHTBOX DOESNT WORK WITH MULTER DISKSTORAGE -->
+          <a href="<%= img.url %>">
+            <img
+              class="img-box"
+              src="<%= img.url %>"
+              crossorigin="anonymous"
+              alt=""
+              uk-cover
+            />
+          </a>
+        </div>
+      </li>
+      <% } %>
+    </ul>
+
+    <div class="uk-position-bottom-center uk-position-small">
+      <ul class="uk-thumbnav">
+        <% let i =0; for(let img of selectedFurniture.imageurl) { %>
+        <li uk-slideshow-item="<%= i %>">
+          <a href="#">
+            <img
+              src="<%= img.url %>"
+              crossorigin="anonymous"
+              width="100"
+              height="67"
+              alt=""
+            />
+          </a>
+        </li>
+        <% i++; } %>
+      </ul>
+    </div>
+  </div>
+  <!-- fullName used is not a DB property but a virtual of firstName & lastName -->
+  <div id="furniture-info">
+    <label><%= selectedFurniture.title %></label>
+    <label id="furniture-info-desc"><%= selectedFurniture.desc %></label>
+    <label id="furniture-info-author"
+      >Posted by: <%= selectedFurniture.author.fullName %></label
+    >
+    <% if (currentUser && selectedFurniture.author.equals(currentUser._id)) { %>
+    <div>
+      <form
+        action="/furniture/<%= selectedFurniture._id %>?_method=DELETE"
+        method="POST"
+      >
+        <a
+          class="uk-button uk-button-default"
+          href="/furniture/<%= selectedFurniture._id %>/edit/"
+          >Edit</a
+        >
+        <button class="uk-button uk-button-danger" type="submit">Delete</button>
+        <!-- make this trigger an alertbox to confirm later -->
+      </form>
+    </div>
+    <% } else if (currentUser &&
+    selectedFurniture.author.equals(currentUser._id)===false){ %>
+    <div class="uk-margin">
+      <div class="uk-inline">
+        <button style="border-color: black" class="uk-button uk-button-default">
+          Contact Lister
+        </button>
+        <div uk-dropdown="mode: click;">
+          <ul class="uk-nav uk-dropdown-nav">
+            <li class="uk-nav-header">Email</li>
+            <li><a href="#"><%= selectedFurniture.author.email %></a></li>
+            <li class="uk-nav-header">Phone</li>
+            <li>
+              <a href="#"
+                ><% if(selectedFurniture.author.phoneNumber) { %> <%=
+                selectedFurniture.author.phoneNumber %> <% } else { %> Not
+                Listed <%} %>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <% } else { %>
+    <div class="uk-margin">
+      <div class="uk-inline">
+        <a
+          style="border-color: black"
+          class="uk-button uk-button-default"
+          href="/login"
+        >
+          Contact Lister
+        </a>
+      </div>
+    </div>
+    <% } %>
+    <input
+      type="hidden"
+      value="<%= selectedFurniture.lat %>"
+      id="latitude"
+      readonly
+    />
+    <input
+      type="hidden"
+      value="<%= selectedFurniture.lng %>"
+      id="longitude"
+      readonly
+    />
+  </div>
 </div>
-<% } %>
 
-<h1>All Questions</h1>
-<% for( let question of selectedFurniture.questions) { %>
-<label>Posted by: <%= question.author.fullName %></label><br />
-<label>Question: <%= question.ques %></label>
-<form
-  action="/furniture/<%= selectedFurniture._id %>/questions/<%= question._id %>/answer?_method=PUT"
-  method="post"
->
-  <% if (!question.ans && currentUser &&
-  selectedFurniture.author.equals(currentUser._id)) { %>
-  <textarea name="questions[ans]" id="question"></textarea>
-  <button type="submit">Submit Answer</button>
-  <% } %>
-</form>
-
-<label>Answer: <%= question.ans %></label><br />
-<form
-  action="/furniture/<%= selectedFurniture._id %>/questions/<%= question._id %>?_method=DELETE"
-  method="POST"
->
-  <% if (currentUser && question.author._id.equals(currentUser._id)) {%>
-  <button type="submit">Delete Question</button>
-  <% } %>
-</form>
-
-<% } %> <% if (currentUser &&
-(selectedFurniture.author.equals(currentUser._id)===false)) { %>
-<h1>Ask any Questions</h1>
-<form action="/furniture/<%= selectedFurniture._id %>/questions" method="POST">
-  <label>Question</label>
-  <textarea name="questions[ques]" id="question"></textarea>
-  <button type="submit">Submit</button>
-</form>
-<% } %>
+<div id="view-location">
+  <label>Where it's Located</label>
+</div>
 <div id="map"></div>
-<input
-  type="hidden"
-  value="<%= selectedFurniture.lat %>"
-  id="latitude"
-  readonly
-/>
-<input
-  type="hidden"
-  value="<%= selectedFurniture.lng %>"
-  id="longitude"
-  readonly
-/>
+
+<div class="show-flex questions-flex">
+  <div id="ask-questions">
+    <h1 class="question-label-ask">Ask a Question?</h1>
+    <% if (currentUser &&
+    (selectedFurniture.author.equals(currentUser._id)===false)) { %>
+    <form
+      action="/furniture/<%= selectedFurniture._id %>/questions"
+      method="POST"
+    >
+      <textarea
+        class="uk-textarea"
+        rows="2"
+        placeholder="Ask a Question about the used furniture to the Lister"
+        name="questions[ques]"
+        id="question"
+      ></textarea>
+      <div class="uk-margin" style="text-align: center">
+        <button
+          class="uk-button uk-button-default"
+          style="color: white"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+    <% } else if(currentUser &&
+    (selectedFurniture.author.equals(currentUser._id)===true)) { %>
+    <label>Can't ask a Question when you're the Lister!</label>
+    <% } else { %>
+    <div style="text-align: center">
+      <label>To ask a Question you must Login or Register</label>
+      <div class="uk-margin">
+        <a
+          class="uk-button uk-button-default"
+          href="/login"
+          style="color: white"
+          >Login
+        </a>
+        <a
+          class="uk-button uk-button-default"
+          href="/register"
+          style="color: white"
+          >Register
+        </a>
+      </div>
+    </div>
+    <% } %>
+  </div>
+
+  <div id="all-questions">
+    <h1 class="question-label-all">All Questions</h1>
+    <% if (!selectedFurniture.questions[0]) { %>
+    <div style="text-align: center; margin: auto">
+      <label>No Questions yet</label>
+    </div>
+    <% } %>
+    <ul uk-accordion="multiple: true;">
+      <% for( let question of selectedFurniture.questions) { %>
+      <li>
+        <a class="uk-accordion-title" href="#"> Q: <%= question.ques %> </a>
+        <div class="uk-accordion-content">
+          <p style="font-style: italic">
+            Asked by: <%= question.author.fullName %>
+          </p>
+          <form
+            action="/furniture/<%= selectedFurniture._id %>/questions/<%= question._id %>/answer?_method=PUT"
+            method="post"
+          >
+            <% if (!question.ans && currentUser &&
+            selectedFurniture.author.equals(currentUser._id)) { %>
+            <textarea name="questions[ans]" id="question"></textarea>
+            <button type="submit">Submit Answer</button>
+            <% } %>
+          </form>
+          <% if(question.ans) {%>
+          <p>A: <%= question.ans %></p>
+          <% } else { %>
+          <p>No Answer yet</p>
+          <% } %>
+          <form
+            action="/furniture/<%= selectedFurniture._id %>/questions/<%= question._id %>?_method=DELETE"
+            method="POST"
+          >
+            <% if (currentUser && question.author._id.equals(currentUser._id)) {
+            %>
+            <button
+              class="uk-button uk-button-default"
+              style="border-color: black"
+              type="submit"
+            >
+              Delete Question
+            </button>
+            <% } %>
+          </form>
+          <% } %>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
 
 <script src="/js/getmaplocation.js"></script>

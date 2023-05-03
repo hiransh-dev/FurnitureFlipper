@@ -4,7 +4,7 @@ const map = L.map("map");
 lat = document.getElementById("latitude").value;
 lng = document.getElementById("longitude").value;
 
-map.setView([lat, lng], 13);
+map.setView([lat, lng], 9);
 marker = L.marker([lat, lng]).addTo(map);
 // marker = L.marker([51.505, -0.09]).addTo(map);
 

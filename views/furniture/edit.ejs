@@ -58,6 +58,20 @@
     >
 <%= selectedFurniture.desc %></textarea
     >
+    <input
+      type="hidden"
+      name="furniture[lat]"
+      id="latitude"
+      value="<%= selectedFurniture.lat %>"
+      readonly
+    />
+    <input
+      type="hidden"
+      name="furniture[lng]"
+      id="longitude"
+      value="<%= selectedFurniture.lng %>"
+      readonly
+    />
     <div class="uk-margin">
       <button
         class="uk-button uk-button-default uk-button-large uk-align-center"
