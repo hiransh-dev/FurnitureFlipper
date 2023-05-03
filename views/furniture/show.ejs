@@ -185,21 +185,32 @@
           <p style="font-style: italic">
             Asked by: <%= question.author.fullName %>
           </p>
+          <% if(question.ans) {%>
+          <p>A: <%= question.ans %></p>
+          <% } else { %>
+          <p>No Answer yet</p>
+          <% } %>
           <form
             action="/furniture/<%= selectedFurniture._id %>/questions/<%= question._id %>/answer?_method=PUT"
             method="post"
           >
             <% if (!question.ans && currentUser &&
             selectedFurniture.author.equals(currentUser._id)) { %>
-            <textarea name="questions[ans]" id="question"></textarea>
-            <button type="submit">Submit Answer</button>
+            <textarea
+              class="uk-textarea"
+              rows="2"
+              placeholder="Answer this question"
+              name="questions[ans]"
+              id="question"
+              style="resize: none"
+            ></textarea>
+            <div class="uk-margin">
+              <button class="uk-button uk-button-default" type="submit">
+                Submit Answer
+              </button>
+            </div>
             <% } %>
           </form>
-          <% if(question.ans) {%>
-          <p>A: <%= question.ans %></p>
-          <% } else { %>
-          <p>No Answer yet</p>
-          <% } %>
           <form
             action="/furniture/<%= selectedFurniture._id %>/questions/<%= question._id %>?_method=DELETE"
             method="POST"
