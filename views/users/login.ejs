@@ -1,8 +1,102 @@
-<% layout('./layouts/boilerplate') %>
-<form action="/login" method="POST">
-  <label for="email">Email</label>
-  <input type="text" id="email" name="username" />
-  <label for="password">Password</label>
-  <input type="password" id="password" name="password" />
-  <button type="submit">Submit</button>
-</form>
+<!DOCTYPE html>
+<link rel="stylesheet" href="/css/sign.css" />
+<link rel="stylesheet" href="/css/main.css" />
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Furniture Flipper | <%= title %></title>
+    <meta
+      name="description"
+      content="Furniture Flipper, used furniture, old furniture, buy used furniture, second hand furniture"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <link rel="stylesheet" href="" /> -->
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/uikit.min.css" />
+  </head>
+  <body>
+    <%- include("../partials/navbar"); %>
+    <div id="home-inner-div">
+      <div id="image-containter-div">
+        <% if (Date.now() % 2 === 0 ) { %>
+        <img id="homepage-img" src="/img/home-img-3.jpg" />
+        <% } else if (Date.now() % 3 === 0 ) {%>
+        <img id="homepage-img" src="/img/home-img-2.jpg" />
+        <% } else { %>
+        <img id="homepage-img" src="/img/home-img-1.jpg" />
+        <% } %>
+        <!-- will display either image, depending on time -->
+      </div>
+      <div id="flex-container-div">
+        <form
+          class="uk-container uk-container-xsmall uk-align-center uk-form-horizontal"
+          action="/login"
+          method="POST"
+        >
+          <div class="uk-margin">
+            <label class="header-label">Sign in to Furniture Flipper</label>
+          </div>
+
+          <div class="uk-margin">
+            <label id="new-label-font" class="uk-form-label" for="email"
+              >Email
+            </label>
+            <div class="uk-inline">
+              <span
+                class="uk-form-icon uk-form-icon-flip"
+                uk-icon="icon: user"
+              ></span>
+              <input
+                type="email"
+                id="email"
+                class="uk-input uk-form-width-medium"
+                name="username"
+                placeholder="*"
+              />
+            </div>
+          </div>
+          <div class="uk-margin">
+            <label id="new-label-font" class="uk-form-label" for="password"
+              >Password
+            </label>
+            <div class="uk-inline">
+              <span
+                class="uk-form-icon uk-form-icon-flip"
+                uk-icon="icon: lock"
+              ></span>
+              <input
+                type="password"
+                id="password"
+                class="uk-input uk-form-width-medium"
+                name="password"
+                placeholder="*"
+              />
+            </div>
+          </div>
+          <div class="uk-margin">
+            <button
+              class="uk-button uk-button-default"
+              style="border-color: black"
+              type="submit"
+            >
+              Sign in
+            </button>
+          </div>
+          <div class="uk-margin">
+            <a
+              class="uk-button uk-button-default"
+              href="/register"
+              style="border-color: black"
+              >Register
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <%- include("../partials/footer"); %>
+    <!-- <script src=""></script> -->
+    <script src="/js/uikit.min.js"></script>
+    <script src="/js/uikit-icons.min.js"></script>
+  </body>
+</html>

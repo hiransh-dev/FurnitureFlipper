@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="/css/home.css" />
+<link rel="stylesheet" href="/css/main.css" />
 <html>
   <head>
     <meta charset="utf-8" />
@@ -17,19 +18,21 @@
   <body>
     <%- include("./partials/navbar"); %>
     <div id="home-inner-div">
-      <div class="flex-container-div">
-        <h1 style="text-align: center">Welcome to Furniture Flipper</h1>
-        <div><a href="/furniture">View All Listings</a></div>
-      </div>
-      <div class="image-containter-div">
+      <div id="image-containter-div">
         <!-- will display either image, depending on time -->
         <% if (Date.now() % 2 === 0 ) { %>
-        <img id="homepage-img" src="/img/home-img-3.png" />
+        <img id="homepage-img" src="/img/home-img-3.jpg" />
         <% } else if (Date.now() % 3 === 0 ) {%>
-        <img id="homepage-img" src="/img/home-img-2.png" />
+        <img id="homepage-img" src="/img/home-img-2.jpg" />
         <% } else { %>
-        <img id="homepage-img" src="/img/home-img-1.png" />
+        <img id="homepage-img" src="/img/home-img-1.jpg" />
         <% } %>
+      </div>
+      <div id="flex-container-div">
+        <label class="header-label" style="text-align: center"
+          >Welcome to Furniture Flipper</label
+        >
+        <div><a href="/furniture">View All Listings</a></div>
       </div>
     </div>
 

@@ -50,6 +50,7 @@ const joiQuestionsSchema = Joi.object({
 const joiUserSchema = Joi.object({
   userRegister: Joi.object({
     email: Joi.string().min(4).max(25).email().required().escapeHTML(),
+    phoneNumber: Joi.number().min(0).max(9999999999).positive().allow(null, ""),
     firstName: Joi.string().min(1).max(25).required().escapeHTML(),
     lastName: Joi.string().min(1).max(25).required().escapeHTML(),
     pwd: Joi.string().required().escapeHTML(),

@@ -5,9 +5,9 @@
   method="POST"
   enctype="multipart/form-data"
 >
-  <legend id="new-label-font" class="uk-legend">
-    List your used Furniture with us
-  </legend>
+  <div class="uk-margin">
+    <h1>List your used Furniture with us</h1>
+  </div>
   <div id="map"></div>
   <input type="hidden" name="furniture[lat]" id="latitude" readonly />
   <input type="hidden" name="furniture[lng]" id="longitude" readonly />
@@ -53,12 +53,13 @@
     <textarea
       class="uk-textarea"
       rows="3"
-      placeholder="Description"
+      placeholder="Add a small Description"
       name="furniture[desc]"
     ></textarea>
     <div class="uk-margin">
       <button
         class="uk-button uk-button-default uk-button-large uk-align-center"
+        style="border-color: black"
         type="submit"
       >
         Submit

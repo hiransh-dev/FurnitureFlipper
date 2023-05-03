@@ -5,7 +5,7 @@ body {
   margin-bottom: 2vh;
   display: flex;
   flex-direction: column;
-  background-color: #ece2e2;
+  background-color: #eeeaea;
 }
 
 #map {
@@ -51,6 +51,7 @@ body {
 .footer {
   background-color: #a1909057;
   margin-top: auto;
+  margin-bottom: 0;
   padding-top: 3vh;
   padding-bottom: 3vh;
 }
