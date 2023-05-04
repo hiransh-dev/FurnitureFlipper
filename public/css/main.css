@@ -8,6 +8,10 @@ body {
   background-color: #eeeaea;
 }
 
+#logo-nav {
+  width: 6vh;
+}
+
 .header-label {
   font-family: "Montserrat", sans-serif;
   font-size: 2.4rem;
