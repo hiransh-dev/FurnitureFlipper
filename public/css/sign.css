@@ -12,14 +12,14 @@
   min-height: 100vh;
 }
 #flex-container-div {
-  width: 73vw;
+  width: 70vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   /* align-items: center; */
 }
 #image-container-div {
-  width: 27vw;
+  width: 30vw;
   height: 100vh;
 }
 #homepage-img {
@@ -40,7 +40,7 @@
     /* min-height: 100vh; */
   }
   #flex-container-div {
-    width: 100vw;
+    width: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;

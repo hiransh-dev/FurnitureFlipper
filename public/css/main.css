@@ -33,8 +33,6 @@ body {
   display: flex;
   flex-direction: column;
   background-color: #eeeaea;
-  /* Fix later, problem with x axis being shown */
-  overflow-x: hidden;
 }
 .main-class {
   margin-top: 0vh;
@@ -110,7 +108,7 @@ body {
 .goals-logo-img {
   display: flex;
   flex-direction: column;
-  width: 5rem;
+  width: 4rem;
   align-items: center;
   margin: 1rem;
 }
@@ -169,8 +167,5 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-  }
-  #footer-goals {
-    margin: 1rem;
   }
 }

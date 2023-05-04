@@ -29,69 +29,73 @@
         <!-- will display either image, depending on time -->
       </div>
       <div id="flex-container-div">
-        <form
-          class="uk-container uk-container-xsmall uk-align-center uk-form-horizontal"
-          action="/login"
-          method="POST"
-        >
-          <div class="uk-margin">
-            <label class="header-label">Sign in to Furniture Flipper</label>
-          </div>
-
-          <div class="uk-margin">
-            <label id="new-label-font" class="uk-form-label" for="email"
-              >Email
-            </label>
-            <div class="uk-inline">
-              <span
-                class="uk-form-icon uk-form-icon-flip"
-                uk-icon="icon: user"
-              ></span>
-              <input
-                type="email"
-                id="email"
-                class="uk-input uk-form-width-medium"
-                name="username"
-                placeholder="*"
-              />
-            </div>
-          </div>
-          <div class="uk-margin">
-            <label id="new-label-font" class="uk-form-label" for="password"
-              >Password
-            </label>
-            <div class="uk-inline">
-              <span
-                class="uk-form-icon uk-form-icon-flip"
-                uk-icon="icon: lock"
-              ></span>
-              <input
-                type="password"
-                id="password"
-                class="uk-input uk-form-width-medium"
-                name="password"
-                placeholder="*"
-              />
-            </div>
-          </div>
-          <div class="uk-margin">
-            <button
-              class="uk-button uk-button-default"
-              style="border-color: black"
-              type="submit"
+        <div class="uk-section">
+          <div class="uk-container uk-container-small">
+            <form
+              class="uk-align-center uk-form-horizontal"
+              action="/login"
+              method="POST"
             >
-              Sign in
-            </button>
+              <div class="uk-margin">
+                <label class="header-label">Sign in to Furniture Flipper</label>
+              </div>
+
+              <div class="uk-margin">
+                <label id="new-label-font" class="uk-form-label" for="email"
+                  >Email
+                </label>
+                <div class="uk-inline">
+                  <span
+                    class="uk-form-icon uk-form-icon-flip"
+                    uk-icon="icon: user"
+                  ></span>
+                  <input
+                    type="email"
+                    id="email"
+                    class="uk-input uk-form-width-large"
+                    name="username"
+                    placeholder="*"
+                  />
+                </div>
+              </div>
+              <div class="uk-margin">
+                <label id="new-label-font" class="uk-form-label" for="password"
+                  >Password
+                </label>
+                <div class="uk-inline">
+                  <span
+                    class="uk-form-icon uk-form-icon-flip"
+                    uk-icon="icon: lock"
+                  ></span>
+                  <input
+                    type="password"
+                    id="password"
+                    class="uk-input uk-form-width-large"
+                    name="password"
+                    placeholder="*"
+                  />
+                </div>
+              </div>
+              <div class="uk-margin">
+                <button
+                  class="uk-button uk-button-default"
+                  style="border-color: black"
+                  type="submit"
+                >
+                  Sign in
+                </button>
+              </div>
+              <div class="uk-margin">
+                <a
+                  class="uk-button uk-button-default"
+                  href="/register"
+                  style="border-color: black"
+                  >Register
+                </a>
+              </div>
+            </form>
           </div>
-          <div class="uk-margin">
-            <a
-              class="uk-button uk-button-default"
-              href="/register"
-              style="border-color: black"
-              >Register
-            </a>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
     <%- include("../partials/footer"); %>

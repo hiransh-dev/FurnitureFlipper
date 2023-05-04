@@ -23,8 +23,9 @@
           <li><a id="nav-bar-font" href="/furniture/new">List with us</a></li>
           <li><a id="nav-bar-font" href="/logout">Logout</a></li>
           <% } %>
-          <li><a id="nav-bar-font" href="#">About us</a></li>
-          <li><a id="nav-bar-font" href="#">Contact us</a></li>
+          <!-- Build About & Contact later -->
+          <!-- <li><a id="nav-bar-font" href="#">About us</a></li> -->
+          <!-- <li><a id="nav-bar-font" href="#">Contact us</a></li> -->
         </ul>
 
         <ul id="nav-bar-small" class="uk-navbar-nav">
@@ -40,6 +41,7 @@
             >
               <ul class="uk-nav uk-navbar-dropdown-nav">
                 <li><a id="nav-bar-font" href="/furniture">View Listed</a></li>
+                <li class="uk-nav-divider"></li>
                 <% if (!currentUser) { %>
                 <li><a id="nav-bar-font" href="/login">Login</a></li>
                 <li><a id="nav-bar-font" href="/register">Register</a></li>
@@ -52,12 +54,13 @@
                 <li>
                   <a id="nav-bar-font" href="/furniture/new">List with us</a>
                 </li>
+                <li class="uk-nav-divider"></li>
                 <li><a id="nav-bar-font" href="/logout">Logout</a></li>
                 <% } %>
-                <li class="uk-nav-divider"></li>
+                <!-- Build About & Contact later -->
+                <!-- <li class="uk-nav-divider"></li>
                 <li><a id="nav-bar-font" href="#">About us</a></li>
-                <li><a id="nav-bar-font" href="#">Contact us</a></li>
-                <!-- <li class="uk-nav-header">Header</li> -->
+                <li><a id="nav-bar-font" href="#">Contact us</a></li> -->
               </ul>
             </div>
           </li>

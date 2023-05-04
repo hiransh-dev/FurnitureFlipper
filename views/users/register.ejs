@@ -29,117 +29,121 @@
         <!-- will display either image, depending on time -->
       </div>
       <div id="flex-container-div">
-        <form
-          class="uk-container uk-container-xsmall uk-align-center uk-form-horizontal"
-          action="/register"
-          method="POST"
-        >
-          <div class="uk-margin">
-            <label class="header-label">Sign up to Furniture Flipper</label>
-          </div>
-          <div class="uk-margin">
-            <label id="new-label-font" class="uk-form-label" for="firstName"
-              >Firstname</label
+        <div class="uk-section">
+          <div class="uk-container uk-container-small">
+            <form
+              class="uk-align-center uk-form-horizontal"
+              action="/register"
+              method="POST"
             >
-            <div class="uk-inline">
-              <span
-                class="uk-form-icon uk-form-icon-flip"
-                uk-icon="icon: user"
-              ></span>
-              <input
-                type="text"
-                id="firstName"
-                class="uk-input uk-form-width-medium"
-                name="userRegister[firstName]"
-                placeholder="*"
-                required
-              />
-            </div>
+              <div class="uk-margin">
+                <label class="header-label">Sign up to Furniture Flipper</label>
+              </div>
+              <div class="uk-margin">
+                <label id="new-label-font" class="uk-form-label" for="firstName"
+                  >Firstname</label
+                >
+                <div class="uk-inline">
+                  <span
+                    class="uk-form-icon uk-form-icon-flip"
+                    uk-icon="icon: user"
+                  ></span>
+                  <input
+                    type="text"
+                    id="firstName"
+                    class="uk-input uk-form-width-medium"
+                    name="userRegister[firstName]"
+                    placeholder="*"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="uk-margin">
+                <label id="new-label-font" class="uk-form-label" for="lastName"
+                  >Lastname</label
+                >
+                <div class="uk-inline">
+                  <span
+                    class="uk-form-icon uk-form-icon-flip"
+                    uk-icon="icon: user"
+                  ></span>
+                  <input
+                    type="text"
+                    id="lastName"
+                    class="uk-input uk-form-width-medium"
+                    name="userRegister[lastName]"
+                    placeholder="*"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="uk-margin">
+                <label id="new-label-font" class="uk-form-label" for="email"
+                  >Phone</label
+                >
+                <div class="uk-inline">
+                  <span
+                    class="uk-form-icon uk-form-icon-flip"
+                    uk-icon="icon: receiver"
+                  ></span>
+                  <input
+                    type="phone"
+                    id="phone"
+                    class="uk-input uk-form-width-medium"
+                    name="userRegister[phoneNumber]"
+                  />
+                </div>
+              </div>
+              <div class="uk-margin">
+                <label id="new-label-font" class="uk-form-label" for="email"
+                  >Email</label
+                >
+                <div class="uk-inline">
+                  <span
+                    class="uk-form-icon uk-form-icon-flip"
+                    uk-icon="icon: mail"
+                  ></span>
+                  <input
+                    type="email"
+                    id="email"
+                    class="uk-input uk-form-width-large"
+                    name="userRegister[email]"
+                    placeholder="*"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="uk-margin">
+                <label id="new-label-font" class="uk-form-label" for="password"
+                  >Password</label
+                >
+                <div class="uk-inline">
+                  <span
+                    class="uk-form-icon uk-form-icon-flip"
+                    uk-icon="icon: lock"
+                  ></span>
+                  <input
+                    type="password"
+                    id="password"
+                    class="uk-input uk-form-width-large"
+                    name="userRegister[pwd]"
+                    placeholder="*"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="uk-margin">
+                <button
+                  class="uk-button uk-button-default"
+                  style="border-color: black"
+                  type="submit"
+                >
+                  Sign up
+                </button>
+              </div>
+            </form>
           </div>
-          <div class="uk-margin">
-            <label id="new-label-font" class="uk-form-label" for="lastName"
-              >Lastname</label
-            >
-            <div class="uk-inline">
-              <span
-                class="uk-form-icon uk-form-icon-flip"
-                uk-icon="icon: user"
-              ></span>
-              <input
-                type="text"
-                id="lastName"
-                class="uk-input uk-form-width-medium"
-                name="userRegister[lastName]"
-                placeholder="*"
-                required
-              />
-            </div>
-          </div>
-          <div class="uk-margin">
-            <label id="new-label-font" class="uk-form-label" for="email"
-              >Email</label
-            >
-            <div class="uk-inline">
-              <span
-                class="uk-form-icon uk-form-icon-flip"
-                uk-icon="icon: mail"
-              ></span>
-              <input
-                type="email"
-                id="email"
-                class="uk-input uk-form-width-medium"
-                name="userRegister[email]"
-                placeholder="*"
-                required
-              />
-            </div>
-          </div>
-          <div class="uk-margin">
-            <label id="new-label-font" class="uk-form-label" for="email"
-              >Phone</label
-            >
-            <div class="uk-inline">
-              <span
-                class="uk-form-icon uk-form-icon-flip"
-                uk-icon="icon: receiver"
-              ></span>
-              <input
-                type="phone"
-                id="phone"
-                class="uk-input uk-form-width-medium"
-                name="userRegister[phoneNumber]"
-              />
-            </div>
-          </div>
-          <div class="uk-margin">
-            <label id="new-label-font" class="uk-form-label" for="password"
-              >Password</label
-            >
-            <div class="uk-inline">
-              <span
-                class="uk-form-icon uk-form-icon-flip"
-                uk-icon="icon: lock"
-              ></span>
-              <input
-                type="password"
-                id="password"
-                class="uk-input uk-form-width-medium"
-                name="userRegister[pwd]"
-                placeholder="*"
-                required
-              />
-            </div>
-          </div>
-          <div class="uk-margin">
-            <button
-              class="uk-button uk-button-default"
-              style="border-color: black"
-              type="submit"
-            >
-              Sign up
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
     <%- include("../partials/footer"); %>
