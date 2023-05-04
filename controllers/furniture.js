@@ -34,6 +34,26 @@ module.exports.mapview = async (req, res) => {
   res.render("furniture/map", { title: "Map Listed" });
 };
 
+module.exports.userFurnitureList = async (req, res) => {
+  const curPageNum = req.query.page ? req.query.page : 1;
+  const options = {
+    page: curPageNum,
+    limit: 8,
+    collation: {
+      locale: "en",
+    },
+    sort: { _id: -1 },
+  };
+  await Furniture.paginate(
+    { author: req.user._id },
+    options,
+    function (err, result) {
+      // console.log(result.docs);
+      return res.render("furniture/mylist", { result, title: "My List" });
+    }
+  );
+};
+
 module.exports.renderNew = (req, res) => {
   res.render("furniture/new", { title: "New" });
 };

@@ -50,6 +50,12 @@ router
     catchAsync(furnitureController.new)
   );
 
+router.get(
+  "/user",
+  checkLogin,
+  catchAsync(furnitureController.userFurnitureList)
+);
+
 router
   .route("/:id")
   /* READ / show ROUTE */

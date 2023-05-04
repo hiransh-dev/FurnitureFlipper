@@ -1,21 +1,7 @@
-<% layout('./layouts/boilerplate'); let i =0;%> <% if(result.page <= 1) { %>
+<% layout('./layouts/boilerplate'); let i =0;%>
 <div class="uk-margin">
-  <label class="header-label"
-    >Find Furnitures listed near you from Map
-    <a
-      href="/furniture/map"
-      class="uk-button uk-button-default"
-      style="border-color: black; right: 0"
-      >Go to Map View
-    </a>
-  </label>
+  <label class="header-label">Furniture listed by you</label>
 </div>
-<div id="map_all"></div>
-<div class="uk-margin">
-  <label class="header-label">Recently Listed</label>
-</div>
-<% } %>
-
 <div id="mason" data-masonry='{"percentPosition": true }'>
   <% for(let furniture of result.docs){ %>
   <div class="mason_col">
@@ -64,7 +50,7 @@
       <a
         id="pgprev"
         class="uk-button uk-button-secondary"
-        href="/furniture/?page=<%= result.prevPage %>"
+        href="/furniture/user?page=<%= result.prevPage %>"
         ><span class="uk-margin-small-right" uk-pagination-previous></span>
         Previous
       </a>
@@ -75,7 +61,7 @@
       <a
         id="pgnext"
         class="uk-button uk-button-secondary"
-        href="/furniture/?page=<%= result.nextPage %>"
+        href="/furniture/user?page=<%= result.nextPage %>"
         >Next <span class="uk-margin-small-left" uk-pagination-next></span
       ></a>
       <% } %>
@@ -83,11 +69,10 @@
   </ul>
 </div>
 <div class="uk-margin">
-  <label class="header-label">Current list on Map</label>
+  <label class="header-label">Furniture listed by you on Map </label>
 </div>
 <div id="map_current"></div>
 
-<script src="/js/mapMarker.js"></script>
 <script src="/js/currentMapMarker.js"></script>
 <script src="/js/masonry.pkgd.min.js"></script>
 <script src="/js/imagesloaded.pkgd.min.js"></script>
