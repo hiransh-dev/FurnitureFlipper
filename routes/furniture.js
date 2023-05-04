@@ -35,6 +35,10 @@ const validateFurnitureSchema = (req, res, next) => {
 /* INDEX ROUTE (INDEX shows all listings) */
 router.get("/", catchAsync(furnitureController.index));
 
+router.get("/furnituremaps", catchAsync(furnitureController.allmaps));
+
+router.get("/map", furnitureController.mapview);
+
 /* CREATE ROUTE */
 router
   .route("/new")

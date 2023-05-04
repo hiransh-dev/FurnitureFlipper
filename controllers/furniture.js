@@ -4,8 +4,34 @@ const Furniture = require(path.join(__dirname, "../models/dbFurniture"));
 const timestampToday = require(path.join(__dirname, "../utils/timeFunc"));
 
 module.exports.index = async (req, res) => {
-  const all_furniture = await Furniture.find().sort({ _id: -1 });
-  res.render("furniture/index", { all_furniture, title: "All Listings" });
+  const curPageNum = req.query.page ? req.query.page : 1;
+  const options = {
+    page: curPageNum,
+    limit: 8,
+    collation: {
+      locale: "en",
+    },
+    sort: { _id: -1 },
+  };
+  await Furniture.paginate({}, options, function (err, result) {
+    return res.render("furniture/", {
+      result,
+      title: "All Listings",
+    });
+  });
+  // FOR ENTIRE LISTING ON SINGLE PAGE RENDER (NO PAGINATE)
+  // const all_furniture = await Furniture.find().sort({ _id: -1 });
+  // res.render("furniture/", { all_furniture, title: "All Listings" });
+};
+
+module.exports.allmaps = async (req, res) => {
+  // API to respond with all lat & lng for MapMarker
+  const all_furniture = await Furniture.find({}, "title lat lng");
+  res.json(all_furniture);
+};
+
+module.exports.mapview = async (req, res) => {
+  res.render("furniture/map", { title: "Map Listed" });
 };
 
 module.exports.renderNew = (req, res) => {
@@ -19,7 +45,7 @@ module.exports.new = async (req, res) => {
   new_furniture.imageurl = req.files.map((f) => ({
     // ENABLE THIS FOR CLOUDINARY STORAGE, WHEN DEPLOYED.
     // url: f.path,
-    // REMOVE THIS FOR CLOUDINARY STORAGE, WHEN DEPLOYED.
+    // REMOVE BELOW FOR CLOUDINARY STORAGE, WHEN DEPLOYED.
     url: "/temp/uploads/" + f.filename,
     filename: f.filename,
   }));
@@ -35,8 +61,8 @@ module.exports.read = async (req, res) => {
       populate: {
         path: "author",
       },
-      options: { sort: { _id: -1 } },
-    }); /*can populate directly but needed options, sort here*/
+      options: { sort: { _id: -1 }, limit: 10 },
+    }); /*can populate directly but needed options, sort here for latest questions*/
   res.render("furniture/show", { selectedFurniture, title: "View" });
 };
 
@@ -64,6 +90,6 @@ module.exports.update = async (req, res, next) => {
 
 module.exports.delete = async (req, res) => {
   await Furniture.findByIdAndDelete(req.params.id);
-  //This deletes the questions too sinces its stored as an array in furnitureDB
+  //This deletes the questions with post Middleware that executes after findOneAndDelete in dbFurniture Schema
   res.redirect("/furniture");
 };

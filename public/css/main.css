@@ -38,7 +38,11 @@ body {
   margin-top: 0vh;
   margin-bottom: 2vh;
 }
-#map {
+/* Leaflet/OpenStreet Maps */
+#map_all {
+  height: 50vh;
+}
+#map_current {
   height: 50vh;
 }
 /* BODY FONT STYLES */
@@ -82,7 +86,7 @@ body {
   color: black;
 }
 #footer-socialmedia-links {
-  min-width: 18vw;
+  min-width: 16vw;
   margin: 1rem;
 }
 #footer-socialmedia-icons {

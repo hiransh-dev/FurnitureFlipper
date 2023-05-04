@@ -40,8 +40,6 @@
               style="background-color: black"
             >
               <ul class="uk-nav uk-navbar-dropdown-nav">
-                <li><a id="nav-bar-font" href="/furniture">View Listed</a></li>
-                <li class="uk-nav-divider"></li>
                 <% if (!currentUser) { %>
                 <li><a id="nav-bar-font" href="/login">Login</a></li>
                 <li><a id="nav-bar-font" href="/register">Register</a></li>
@@ -51,6 +49,8 @@
                     >HELLO <%= currentUser.firstName.toUpperCase() %></a
                   >
                 </li>
+                <li class="uk-nav-divider"></li>
+                <li><a id="nav-bar-font" href="/furniture">View Listed</a></li>
                 <li>
                   <a id="nav-bar-font" href="/furniture/new">List with us</a>
                 </li>
