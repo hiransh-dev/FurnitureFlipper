@@ -10,20 +10,22 @@
       </div>
       <div class="uk-navbar-right">
         <ul id="nav-bar-full" class="uk-navbar-nav">
-          <li><a id="nav-bar-font" href="/furniture">View Listed</a></li>
-          <% if (!currentUser) { %>
-          <li><a id="nav-bar-font" href="/login">Login</a></li>
-          <li><a id="nav-bar-font" href="/register">Register</a></li>
-          <% } else { %>
+          <% if (currentUser) { %>
           <li>
             <a id="nav-bar-font" href="/furniture/user"
               >HELLO <%= currentUser.firstName %></a
             >
           </li>
+          <% } %>
+          <li><a id="nav-bar-font" href="/furniture">View All Listed</a></li>
           <li><a id="nav-bar-font" href="/furniture/new">List with us</a></li>
+          <% if (!currentUser) { %>
+          <li><a id="nav-bar-font" href="/login">Login</a></li>
+          <li><a id="nav-bar-font" href="/register">Register</a></li>
+          <% } else { %>
           <li><a id="nav-bar-font" href="/logout">Logout</a></li>
           <% } %>
-          <!-- Build About & Contact later -->
+          <!-- Add these pages later? -->
           <!-- <li><a id="nav-bar-font" href="#">About us</a></li> -->
           <!-- <li><a id="nav-bar-font" href="#">Contact us</a></li> -->
         </ul>
@@ -40,24 +42,28 @@
               style="background-color: black"
             >
               <ul class="uk-nav uk-navbar-dropdown-nav">
-                <% if (!currentUser) { %>
-                <li><a id="nav-bar-font" href="/login">Login</a></li>
-                <li><a id="nav-bar-font" href="/register">Register</a></li>
-                <% } else { %>
+                <% if (currentUser) { %>
                 <li>
                   <a id="nav-bar-font" href="/furniture/user"
                     >HELLO <%= currentUser.firstName.toUpperCase() %></a
                   >
                 </li>
                 <li class="uk-nav-divider"></li>
-                <li><a id="nav-bar-font" href="/furniture">View Listed</a></li>
+                <% } %>
+                <li>
+                  <a id="nav-bar-font" href="/furniture">View All Listed</a>
+                </li>
                 <li>
                   <a id="nav-bar-font" href="/furniture/new">List with us</a>
                 </li>
                 <li class="uk-nav-divider"></li>
+                <% if (!currentUser) { %>
+                <li><a id="nav-bar-font" href="/login">Login</a></li>
+                <li><a id="nav-bar-font" href="/register">Register</a></li>
+                <% } else { %>
                 <li><a id="nav-bar-font" href="/logout">Logout</a></li>
                 <% } %>
-                <!-- Build About & Contact later -->
+                <!-- Add these pages later? -->
                 <!-- <li class="uk-nav-divider"></li>
                 <li><a id="nav-bar-font" href="#">About us</a></li>
                 <li><a id="nav-bar-font" href="#">Contact us</a></li> -->
