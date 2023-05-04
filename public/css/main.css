@@ -1,27 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Ysabeau:ital@0;1&display=swap");
 
-body {
-  min-height: 100vh;
-  margin-bottom: 2vh;
-  display: flex;
-  flex-direction: column;
-  background-color: #eeeaea;
-}
-
+/* NAVBAR STYLES */
 #logo-nav {
   width: 6vh;
 }
-
-.header-label {
-  font-family: "Montserrat", sans-serif;
-  font-size: 2.4rem;
-}
-
-#map {
-  height: 50vh;
-}
-
-/* NAVBAR STYLES */
 .nav-bar {
   background-color: black;
 }
@@ -45,15 +27,30 @@ body {
 }
 
 /* BODY STYLES */
+body {
+  min-height: 100vh;
+  margin-bottom: 2vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #eeeaea;
+  /* Fix later, problem with x axis being shown */
+  overflow-x: hidden;
+}
 .main-class {
   margin-top: 0vh;
   margin-bottom: 2vh;
 }
-
+#map {
+  height: 50vh;
+}
 /* BODY FONT STYLES */
 #new-label-font {
   font-family: "Montserrat", sans-serif;
   font-size: 1.2rem;
+}
+.header-label {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.4rem;
 }
 
 /* FOOTER STYLES */
@@ -63,6 +60,59 @@ body {
   margin-bottom: 0;
   padding-top: 3vh;
   padding-bottom: 3vh;
+}
+#footer-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#footer-flex-logo {
+  min-width: 18vw;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  /* justify-content: center; */
+}
+#footer-quick-links {
+  min-width: 9vw;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+.footer-quick-links-labels {
+  text-decoration: none;
+  color: black;
+}
+#footer-socialmedia-links {
+  min-width: 18vw;
+  margin: 1rem;
+}
+#footer-socialmedia-icons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-top: 1rem;
+}
+#footer-socialmedia-icons * {
+  flex-basis: 2rem;
+}
+#footer-goals {
+  margin: 1rem;
+  /* text-align: center; */
+}
+#goals-logo-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.goals-logo-img {
+  display: flex;
+  flex-direction: column;
+  width: 5rem;
+  align-items: center;
+  margin: 1rem;
 }
 
 /* MASONRY CARD STYLES */
@@ -113,5 +163,14 @@ body {
   /* MASONRY CARD STYLES */
   .mason_col {
     width: 50%; /*3 columns*/
+  }
+
+  #footer-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  #footer-goals {
+    margin: 1rem;
   }
 }
