@@ -46,9 +46,12 @@
   <div id="furniture-info">
     <label><%= selectedFurniture.title %></label>
     <label id="furniture-info-desc"><%= selectedFurniture.desc %></label>
-    <label id="furniture-info-author"
-      >Posted by: <%= selectedFurniture.author.fullName %></label
-    >
+    <label id="furniture-info-author">
+      Posted by: <%= selectedFurniture.author.fullName %>
+    </label>
+    <label id="furniture-info-author">
+      Posted on: <%= selectedFurniture.timestamp %>
+    </label>
     <% if (currentUser && selectedFurniture.author.equals(currentUser._id)) { %>
     <div>
       <form
