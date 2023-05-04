@@ -9,8 +9,8 @@
     <label class="header-label">List your used Furniture with us</label>
   </div>
   <div id="map"></div>
-  <input type="hidden" name="furniture[lat]" id="latitude" readonly />
-  <input type="hidden" name="furniture[lng]" id="longitude" readonly />
+  <input type="hidden" name="furniture[lat]" id="latitude" readonly required />
+  <input type="hidden" name="furniture[lng]" id="longitude" readonly required />
   <div class="uk-margin">
     <label id="new-label-font" class="uk-form-label" for="furniture[title]"
       >Title</label
@@ -20,6 +20,7 @@
       type="text"
       placeholder="Title"
       name="furniture[title]"
+      required
     />
   </div>
   <div class="uk-margin">
@@ -32,6 +33,7 @@
       type="text"
       placeholder="Price"
       name="furniture[price]"
+      required
     />
   </div>
   <div class="uk-margin">
@@ -44,7 +46,7 @@
       placeholder="Image URL"
       name="furniture[imageurl]"
     /> -->
-    <input type="file" name="furniture[imageurl]" multiple />
+    <input type="file" name="furniture[imageurl]" multiple required />
   </div>
   <div class="uk-margin">
     <label id="new-label-font" class="uk-form-label" for="furniture[desc]"
