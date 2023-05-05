@@ -120,6 +120,16 @@ body {
   align-items: center;
   margin: 1rem;
 }
+#dev-name {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 4rem;
+}
+#dev-name a {
+  text-decoration: none;
+  color: black;
+}
 
 /* MASONRY CARD STYLES */
 #mason {
