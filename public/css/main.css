@@ -40,6 +40,9 @@ body {
   margin-bottom: 2vh;
 }
 /* Leaflet/OpenStreet Maps */
+#map {
+  height: 50vh;
+}
 #map_all {
   height: 50vh;
 }
