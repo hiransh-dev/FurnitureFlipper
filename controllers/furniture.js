@@ -34,6 +34,34 @@ module.exports.mapview = async (req, res) => {
   res.render("furniture/map", { title: "Map Listed" });
 };
 
+module.exports.searchFurniture = async (req, res) => {
+  const curPageNum = req.query.page ? req.query.page : 1;
+  const searchString = req.query.q;
+  const searchRegex = new RegExp(searchString, "i");
+  // const all_furniture = await Furniture.find({}).sort({ _id: -1 }).limit(25);
+  // console.log(all_furniture);
+  const options = {
+    page: curPageNum,
+    limit: 8,
+    collation: {
+      locale: "en",
+    },
+    sort: { _id: -1 },
+  };
+  await Furniture.paginate(
+    { title: searchRegex },
+    options,
+    function (err, result) {
+      // console.log(result.docs);
+      res.render("furniture/search", {
+        result,
+        searchString,
+        title: "Search",
+      });
+    }
+  );
+};
+
 module.exports.userFurnitureList = async (req, res) => {
   const curPageNum = req.query.page ? req.query.page : 1;
   const options = {

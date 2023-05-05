@@ -56,6 +56,8 @@ router.get(
   catchAsync(furnitureController.userFurnitureList)
 );
 
+router.get("/search", catchAsync(furnitureController.searchFurniture));
+
 router
   .route("/:id")
   /* READ / show ROUTE */
