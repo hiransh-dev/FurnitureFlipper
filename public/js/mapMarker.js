@@ -14,7 +14,7 @@ fetch("/furniture/furnituremaps")
             data[j]._id +
             ">Check it out</a>"
         );
-      console.log(data[j].title);
+      // console.log(data[j].title);
     }
   })
   .catch((error) => console.error(error));
