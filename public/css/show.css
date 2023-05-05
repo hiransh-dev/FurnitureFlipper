@@ -42,6 +42,14 @@
   display: flex;
   flex-direction: column;
 }
+#furniture-info-price {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.4rem;
+  font-weight: bold;
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
 #furniture-info-author {
   font-family: "Montserrat", sans-serif;
   font-size: 1rem;
