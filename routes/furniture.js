@@ -9,17 +9,16 @@ const multer = require("multer");
 // ENABLE THIS FOR LOCAL STORAGE
 // const upload = multer({ dest: "public/temp/uploads/" });
 const upload = multer({
-  // storage: storage,
   dest: "public/temp/uploads/",
   limits: {
     fileSize: 4 * 1024 * 1024, // MBsizeDesired * kilobytes * bytes
-    files: 4,
+    files: 4, //Limit number of files to upload at once
   },
 });
 // ENABLE THIS FOR CLOUDINARY STORAGE, WHEN DEPLOYED.
 // const { storage } = require("../cloudinary");
 // const upload = multer({
-//   storage,
+// storage: storage,
 //   limits: {
 //     fileSize: 2 * 1024 * 1024, // 2MB in bytes
 //     files: 4,

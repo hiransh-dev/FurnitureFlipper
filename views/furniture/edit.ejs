@@ -52,10 +52,25 @@
       <input
         class="uk-input uk-form-width-large"
         type="text"
-        placeholder="Select upto 4 Images"
+        placeholder="You can keep upto 4 images"
         disabled
       />
     </div>
+  </div>
+  <div class="uk-margin">
+    <ul class="uk-thumbnav" uk-margin>
+      <% selectedFurniture.imageurl.forEach(img => { %>
+      <li class="uk-active">
+        <input
+          type="checkbox"
+          id="<%= img.filename %>"
+          value="<%= img.filename %>"
+          name="deleteImgs[]"
+        />Delete
+        <img src="<%= img.url %>" width="100" height="67" alt="" />
+      </li>
+      <% }); %>
+    </ul>
   </div>
   <div class="uk-margin">
     <label id="new-label-font" class="uk-form-label" for="furniture[desc]"

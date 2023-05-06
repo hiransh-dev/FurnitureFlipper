@@ -181,6 +181,25 @@ module.exports.update = async (req, res, next) => {
   }));
   newEdit_furniture.imageurl.push(...newimgs);
   newEdit_furniture.save();
+  //To delete images selected to be deleted
+  if (req.body.deleteImgs) {
+    await newEdit_furniture.updateOne({
+      $pull: { imageurl: { filename: { $in: req.body.deleteImgs } } },
+    });
+  }
+  // Deletes on Cloudinary Storage
+  // for (let imageFilename of req.body.deleteImgs) {
+  //   await cloudinary.uploader.destroy(imageFilename);
+  // }
+  // Deletes on Local Storage, Remove when switching to cloudinary storage
+  for (let image of req.body.deleteImgs) {
+    fs.unlink(path.join(__dirname, "../public/temp/uploads", image), (err) => {
+      if (err) {
+        throw new expressError("Internal Error", 500);
+      }
+    });
+  }
+
   res.redirect(`/furniture/${req.params.id}`);
 };
 

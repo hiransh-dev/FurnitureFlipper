@@ -36,6 +36,7 @@ const joiFurnitureSchema = Joi.object({
     // timestamp: Joi.string().required(),
     // timestamp is commented because the validateJoi middleware funtion in app will be executed before timestamp is added through timeFunc, alternatively i could make it allowed but null
   }).required(),
+  deleteImgs: Joi.array(),
 });
 
 const joiQuestionsSchema = Joi.object({

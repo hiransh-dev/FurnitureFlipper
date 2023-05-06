@@ -8,7 +8,7 @@
     <ul class="show-img-full uk-slideshow-items">
       <% for(let img of selectedFurniture.imageurl) {%>
       <li>
-        <div class="" uk-lightbox>
+        <div uk-lightbox>
           <!-- LIGHTBOX DOESNT WORK WITH MULTER DISKSTORAGE -->
           <a href="<%= img.url %>">
             <img
@@ -23,8 +23,7 @@
       </li>
       <% } %>
     </ul>
-
-    <div class="uk-position-bottom-center uk-position-small">
+    <div class="uk-position-relative uk-position-small">
       <ul class="uk-thumbnav">
         <% let i =0; for(let img of selectedFurniture.imageurl) { %>
         <li uk-slideshow-item="<%= i %>">
