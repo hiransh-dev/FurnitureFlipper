@@ -7,10 +7,24 @@ const { joiFurnitureSchema } = require(path.join(__dirname, "../joi_schema"));
 
 const multer = require("multer");
 // ENABLE THIS FOR LOCAL STORAGE
-const upload = multer({ dest: "public/temp/uploads/" });
+// const upload = multer({ dest: "public/temp/uploads/" });
+const upload = multer({
+  // storage: storage,
+  dest: "public/temp/uploads/",
+  limits: {
+    fileSize: 2 * 1024 * 1024, // 2MB in bytes
+    files: 4,
+  },
+});
 // ENABLE THIS FOR CLOUDINARY STORAGE, WHEN DEPLOYED.
 // const { storage } = require("../cloudinary");
-// const upload = multer({ storage });
+// const upload = multer({
+//   storage,
+//   limits: {
+//     fileSize: 2 * 1024 * 1024, // 2MB in bytes
+//     files: 4,
+//   },
+// });
 
 const catchAsync = require(path.join(__dirname, "../utils/catchAsync"));
 const expressError = require(path.join(__dirname, "../utils/ExpressError"));
@@ -40,7 +54,7 @@ router
   .get(checkLogin, furnitureController.renderNew)
   .post(
     checkLogin,
-    upload.array("furniture[imageurl]", 4),
+    upload.array("furniture[imageurl]"),
     validateFurnitureSchema,
     catchAsync(furnitureController.new)
   );
@@ -67,7 +81,7 @@ router
   .put(
     checkLogin,
     isAuthor,
-    upload.array("furniture[imageurl]", 4),
+    upload.array("furniture[imageurl]"),
     validateFurnitureSchema,
     catchAsync(furnitureController.update)
   );

@@ -93,6 +93,17 @@ module.exports.new = async (req, res, next) => {
   if (req.files.length === 0) {
     return next(new expressError("No file selected to upload", 500));
   }
+  const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
+  for (let i = 0; i < req.files.length; i++) {
+    if (!allowedTypes.includes(req.files[i].mimetype)) {
+      return next(
+        new expressError(
+          "File selected isn't an image or a valid image type. Please select jpeg/jpg/png format",
+          500
+        )
+      );
+    }
+  }
   const new_furniture = new Furniture(req.body.furniture);
   new_furniture.timestamp = timestampToday;
   new_furniture.author = req.user._id;
@@ -128,8 +139,8 @@ module.exports.renderEdit = async (req, res) => {
 
 module.exports.update = async (req, res, next) => {
   const foundFurniture = await Furniture.findById(req.params.id);
-  const countImages = foundFurniture.imageurl.length + req.files.length;
-  if (countImages >= 5) {
+  const countTotalImages = foundFurniture.imageurl.length + req.files.length;
+  if (countTotalImages >= 5) {
     return next(
       new expressError(
         "Can't upload more than 4 images. Please try again.",
