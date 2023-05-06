@@ -67,7 +67,7 @@ router
   .put(
     checkLogin,
     isAuthor,
-    upload.array("furniture[imageurl]"),
+    upload.array("furniture[imageurl]", 4),
     validateFurnitureSchema,
     catchAsync(furnitureController.update)
   );

@@ -1,6 +1,7 @@
 const path = require("path");
 const Furniture = require(path.join(__dirname, "../models/dbFurniture"));
 
+const expressError = require(path.join(__dirname, "../utils/ExpressError"));
 const timestampToday = require(path.join(__dirname, "../utils/timeFunc"));
 
 //TO DELETE FROM CLOUDINARY
@@ -88,7 +89,10 @@ module.exports.renderNew = (req, res) => {
   res.render("furniture/new", { title: "New" });
 };
 
-module.exports.new = async (req, res) => {
+module.exports.new = async (req, res, next) => {
+  if (req.files.length === 0) {
+    return next(new expressError("No file selected to upload", 500));
+  }
   const new_furniture = new Furniture(req.body.furniture);
   new_furniture.timestamp = timestampToday;
   new_furniture.author = req.user._id;
@@ -123,6 +127,16 @@ module.exports.renderEdit = async (req, res) => {
 };
 
 module.exports.update = async (req, res, next) => {
+  const foundFurniture = await Furniture.findById(req.params.id);
+  const countImages = foundFurniture.imageurl.length + req.files.length;
+  if (countImages >= 5) {
+    return next(
+      new expressError(
+        "Can't upload more than 4 images. Please try again.",
+        500
+      )
+    );
+  }
   const edited_furniture = req.body.furniture;
   const newEdit_furniture = await Furniture.findByIdAndUpdate(req.params.id, {
     title: edited_furniture.title,
@@ -131,7 +145,11 @@ module.exports.update = async (req, res, next) => {
     desc: edited_furniture.desc,
   });
   const newimgs = req.files.map((f) => ({
-    url: f.path,
+    // FOR LOCAL STORAGE URL, REMOVE/COMMENT WHEN DEPLOYED OR USING CLOUDINARY.
+    url: "/temp/uploads/" + f.filename,
+    // ENABLE THIS FOR CLOUDINARY STORAGE, WHEN DEPLOYED.
+    // url: f.path
+
     filename: f.filename,
   }));
   newEdit_furniture.imageurl.push(...newimgs);
