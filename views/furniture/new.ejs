@@ -46,7 +46,15 @@
       placeholder="Image URL"
       name="furniture[imageurl]"
     /> -->
-    <input type="file" name="furniture[imageurl]" multiple required />
+    <div uk-form-custom="target: true">
+      <input type="file" name="furniture[imageurl]" multiple required />
+      <input
+        class="uk-input uk-form-width-medium"
+        type="text"
+        placeholder="Select Images"
+        disabled
+      />
+    </div>
   </div>
   <div class="uk-margin">
     <label id="new-label-font" class="uk-form-label" for="furniture[desc]"
