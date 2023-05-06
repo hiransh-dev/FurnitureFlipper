@@ -7,14 +7,11 @@ const Furniture = require(path.join(__dirname, "../models/dbFurniture"));
 const { joiFurnitureSchema } = require(path.join(__dirname, "../joi_schema"));
 
 const multer = require("multer");
-
 // ENABLE THIS FOR LOCAL STORAGE
 const upload = multer({ dest: "public/temp/uploads/" });
-
 // ENABLE THIS FOR CLOUDINARY STORAGE, WHEN DEPLOYED.
 // const { storage } = require("../cloudinary");
 // const upload = multer({ storage });
-//
 
 const catchAsync = require(path.join(__dirname, "../utils/catchAsync"));
 const expressError = require(path.join(__dirname, "../utils/ExpressError"));

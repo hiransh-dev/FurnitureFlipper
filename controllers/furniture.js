@@ -3,6 +3,11 @@ const Furniture = require(path.join(__dirname, "../models/dbFurniture"));
 
 const timestampToday = require(path.join(__dirname, "../utils/timeFunc"));
 
+//TO DELETE FROM CLOUDINARY
+const { cloudinary } = require("../cloudinary");
+//TO DELETE FROM LOCAL STORAGE (UPLOADED MY MULTER)
+const fs = require("fs");
+
 module.exports.index = async (req, res) => {
   const curPageNum = req.query.page ? req.query.page : 1;
   const options = {
@@ -137,7 +142,26 @@ module.exports.update = async (req, res, next) => {
 };
 
 module.exports.delete = async (req, res) => {
-  await Furniture.findByIdAndDelete(req.params.id);
+  //Can also use this directly & get deleted object to pass in cloudinary.uploader.destroy method
+  //const furnitureToDel = await Furniture.findByIdAndDelete(req.params.id);
+
+  //Find object for it to delete on Cloudinary Storage or Local Storage
+  const furnitureToDel = await Furniture.findById(req.params.id);
   //This deletes the questions with post Middleware that executes after findOneAndDelete in dbFurniture Schema
+  await Furniture.findByIdAndDelete(req.params.id);
+  //Deletes on Cloudinary Storage
+  // for (let image of furnitureToDel.imageurl) {
+  //   await cloudinary.uploader.destroy(image.filename);
+  // }
+  //Deletes on Local Storage, Remove when switching to cloudinary storage
+  for (let image of furnitureToDel.imageurl) {
+    fs.unlink(path.join(__dirname, "../public/", image.url), (err) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+    });
+  }
+  //File delete on Local or Cloudinary can be added to middleware, like deleting questions of said furniture
   res.redirect("/furniture");
 };
