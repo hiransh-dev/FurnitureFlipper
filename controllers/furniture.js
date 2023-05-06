@@ -9,6 +9,8 @@ const { cloudinary } = require("../cloudinary");
 //TO DELETE FROM LOCAL STORAGE (UPLOADED MY MULTER)
 const fs = require("fs");
 
+const { unexpFileDel } = require("../middleware");
+
 module.exports.index = async (req, res) => {
   const curPageNum = req.query.page ? req.query.page : 1;
   const options = {
@@ -96,6 +98,7 @@ module.exports.new = async (req, res, next) => {
   const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
   for (let i = 0; i < req.files.length; i++) {
     if (!allowedTypes.includes(req.files[i].mimetype)) {
+      unexpFileDel(req.files);
       return next(
         new expressError(
           "File selected isn't an image or a valid image type. Please select jpeg/jpg/png format",
@@ -109,7 +112,7 @@ module.exports.new = async (req, res, next) => {
   new_furniture.author = req.user._id;
   new_furniture.imageurl = req.files.map((f) => ({
     // FOR LOCAL STORAGE URL, REMOVE/COMMENT WHEN DEPLOYED OR USING CLOUDINARY.
-    url: "/temp/uploads/" + f.filename,
+    url: "/temp/uploads/" + f.filename, //cant use f.path since it points to public & public is served as a static asset
     // ENABLE THIS FOR CLOUDINARY STORAGE, WHEN DEPLOYED.
     // url: f.path,
 
@@ -141,6 +144,7 @@ module.exports.update = async (req, res, next) => {
   const foundFurniture = await Furniture.findById(req.params.id);
   const countTotalImages = foundFurniture.imageurl.length + req.files.length;
   if (countTotalImages >= 5) {
+    unexpFileDel(req.files);
     return next(
       new expressError(
         "Can't upload more than 4 images. Please try again.",
@@ -148,8 +152,10 @@ module.exports.update = async (req, res, next) => {
       )
     );
   }
+  const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
   for (let i = 0; i < req.files.length; i++) {
     if (!allowedTypes.includes(req.files[i].mimetype)) {
+      unexpFileDel(req.files);
       return next(
         new expressError(
           "File selected isn't an image or a valid image type. Please select jpeg/jpg/png format",
@@ -181,8 +187,6 @@ module.exports.update = async (req, res, next) => {
 module.exports.delete = async (req, res) => {
   // Find object for it to delete on Cloudinary Storage or Local Storage
   const furnitureToDel = await Furniture.findById(req.params.id);
-  // This deletes the questions with post Middleware that executes after findOneAndDelete in dbFurniture Schema
-  await Furniture.findByIdAndDelete(req.params.id);
   // Deletes on Cloudinary Storage
   // for (let image of furnitureToDel.imageurl) {
   //   await cloudinary.uploader.destroy(image.filename);
@@ -191,11 +195,14 @@ module.exports.delete = async (req, res) => {
   for (let image of furnitureToDel.imageurl) {
     fs.unlink(path.join(__dirname, "../public/", image.url), (err) => {
       if (err) {
-        console.error(err);
-        return;
+        throw new expressError("Internal Error", 500);
+        // console.error(err);
+        // return;
       }
     });
   }
+  // This deletes the questions with post Middleware that executes after findOneAndDelete in dbFurniture Schema
+  await Furniture.findByIdAndDelete(req.params.id);
   // File delete on Local or Cloudinary can be added to middleware, like deleting questions of said furniture
   res.redirect("/furniture");
 };

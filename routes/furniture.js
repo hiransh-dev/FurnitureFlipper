@@ -29,11 +29,12 @@ const upload = multer({
 const catchAsync = require(path.join(__dirname, "../utils/catchAsync"));
 const expressError = require(path.join(__dirname, "../utils/ExpressError"));
 
-const { checkLogin, isAuthor } = require("../middleware");
+const { checkLogin, isAuthor, unexpFileDel } = require("../middleware");
 
 const validateFurnitureSchema = (req, res, next) => {
   const { error } = joiFurnitureSchema.validate(req.body);
   if (error) {
+    unexpFileDel(req.files);
     const err_msg = error.details.map((er) => er.message).join(",");
     throw new expressError(err_msg, 400); /* 400 stand for bad request */
   } else {

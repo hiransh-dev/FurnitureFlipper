@@ -1,6 +1,12 @@
 const path = require("path");
+const expressError = require(path.join(__dirname, "/utils/ExpressError"));
 const Furniture = require(path.join(__dirname, "/models/dbFurniture"));
 const Questions = require(path.join(__dirname, "/models/dbQuestions"));
+
+//TO DELETE FROM CLOUDINARY
+// const { cloudinary } = require("../cloudinary");
+//TO DELETE FROM LOCAL STORAGE (UPLOADED MY MULTER)
+const fs = require("fs");
 
 const checkLogin = (req, res, next) => {
   if (!req.isAuthenticated()) {
@@ -37,4 +43,26 @@ const isQuestionAuthor = async (req, res, next) => {
   next();
 };
 
-module.exports = { checkLogin, LoggedinTrue, isAuthor, isQuestionAuthor };
+const unexpFileDel = async (files) => {
+  // Deletes on Cloudinary Storage
+  // for (let file of files) {
+  //   await cloudinary.uploader.destroy(file.filename);
+  // }
+  // Deletes on Local Storage, Remove when switching to cloudinary storage
+  for (let file of files) {
+    fs.unlink(path.join(__dirname, file.path), (err) => {
+      if (err) {
+        throw new expressError("Internal Error", 500);
+      }
+      // console.log("deleted" + path.join(__dirname, "../", file.path));
+    });
+  }
+};
+
+module.exports = {
+  checkLogin,
+  LoggedinTrue,
+  isAuthor,
+  isQuestionAuthor,
+  unexpFileDel,
+};
