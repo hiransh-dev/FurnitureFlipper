@@ -148,6 +148,16 @@ module.exports.update = async (req, res, next) => {
       )
     );
   }
+  for (let i = 0; i < req.files.length; i++) {
+    if (!allowedTypes.includes(req.files[i].mimetype)) {
+      return next(
+        new expressError(
+          "File selected isn't an image or a valid image type. Please select jpeg/jpg/png format",
+          500
+        )
+      );
+    }
+  }
   const edited_furniture = req.body.furniture;
   const newEdit_furniture = await Furniture.findByIdAndUpdate(req.params.id, {
     title: edited_furniture.title,
