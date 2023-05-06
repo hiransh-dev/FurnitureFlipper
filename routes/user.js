@@ -4,12 +4,10 @@ const passport = require("passport");
 const router = express.Router();
 
 const userController = require("../controllers/user");
-const User = require(path.join(__dirname, "../models/dbUser"));
 const { joiUserSchema } = require(path.join(__dirname, "../joi_schema"));
 
 const catchAsync = require(path.join(__dirname, "../utils/catchAsync"));
 const expressError = require(path.join(__dirname, "../utils/ExpressError"));
-const timestampToday = require(path.join(__dirname, "../utils/timeFunc"));
 
 const { checkLogin, LoggedinTrue } = require("../middleware");
 

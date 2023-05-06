@@ -3,13 +3,10 @@ const express = require("express");
 const router = express.Router({ mergeParams: true }); //to get :id from furnitureRoute
 
 const questionsController = require("../controllers/questions");
-const Furniture = require(path.join(__dirname, "../models/dbFurniture"));
-const Questions = require(path.join(__dirname, "../models/dbQuestions"));
 const { joiQuestionsSchema } = require(path.join(__dirname, "../joi_schema"));
 
 const catchAsync = require(path.join(__dirname, "../utils/catchAsync"));
 const expressError = require(path.join(__dirname, "../utils/ExpressError"));
-const timestampToday = require(path.join(__dirname, "../utils/timeFunc"));
 
 const { checkLogin, isAuthor, isQuestionAuthor } = require("../middleware");
 

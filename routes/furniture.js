@@ -3,7 +3,6 @@ const express = require("express");
 const router = express.Router();
 
 const furnitureController = require("../controllers/furniture");
-const Furniture = require(path.join(__dirname, "../models/dbFurniture"));
 const { joiFurnitureSchema } = require(path.join(__dirname, "../joi_schema"));
 
 const multer = require("multer");
@@ -15,7 +14,6 @@ const upload = multer({ dest: "public/temp/uploads/" });
 
 const catchAsync = require(path.join(__dirname, "../utils/catchAsync"));
 const expressError = require(path.join(__dirname, "../utils/ExpressError"));
-const timestampToday = require(path.join(__dirname, "../utils/timeFunc"));
 
 const { checkLogin, isAuthor } = require("../middleware");
 

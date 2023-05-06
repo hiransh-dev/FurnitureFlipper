@@ -43,8 +43,6 @@ module.exports.searchFurniture = async (req, res) => {
   const curPageNum = req.query.page ? req.query.page : 1;
   const searchString = req.query.q;
   const searchRegex = new RegExp(searchString, "i");
-  // const all_furniture = await Furniture.find({}).sort({ _id: -1 }).limit(25);
-  // console.log(all_furniture);
   const options = {
     page: curPageNum,
     limit: 8,
@@ -57,7 +55,6 @@ module.exports.searchFurniture = async (req, res) => {
     { title: searchRegex },
     options,
     function (err, result) {
-      // console.log(result.docs);
       res.render("furniture/search", {
         result,
         searchString,
@@ -96,10 +93,11 @@ module.exports.new = async (req, res) => {
   new_furniture.timestamp = timestampToday;
   new_furniture.author = req.user._id;
   new_furniture.imageurl = req.files.map((f) => ({
+    // FOR LOCAL STORAGE URL, REMOVE/COMMENT WHEN DEPLOYED OR USING CLOUDINARY.
+    url: "/temp/uploads/" + f.filename,
     // ENABLE THIS FOR CLOUDINARY STORAGE, WHEN DEPLOYED.
     // url: f.path,
-    // REMOVE BELOW FOR CLOUDINARY STORAGE, WHEN DEPLOYED.
-    url: "/temp/uploads/" + f.filename,
+
     filename: f.filename,
   }));
   await new_furniture.save();
@@ -142,18 +140,15 @@ module.exports.update = async (req, res, next) => {
 };
 
 module.exports.delete = async (req, res) => {
-  //Can also use this directly & get deleted object to pass in cloudinary.uploader.destroy method
-  //const furnitureToDel = await Furniture.findByIdAndDelete(req.params.id);
-
-  //Find object for it to delete on Cloudinary Storage or Local Storage
+  // Find object for it to delete on Cloudinary Storage or Local Storage
   const furnitureToDel = await Furniture.findById(req.params.id);
-  //This deletes the questions with post Middleware that executes after findOneAndDelete in dbFurniture Schema
+  // This deletes the questions with post Middleware that executes after findOneAndDelete in dbFurniture Schema
   await Furniture.findByIdAndDelete(req.params.id);
-  //Deletes on Cloudinary Storage
+  // Deletes on Cloudinary Storage
   // for (let image of furnitureToDel.imageurl) {
   //   await cloudinary.uploader.destroy(image.filename);
   // }
-  //Deletes on Local Storage, Remove when switching to cloudinary storage
+  // Deletes on Local Storage, Remove when switching to cloudinary storage
   for (let image of furnitureToDel.imageurl) {
     fs.unlink(path.join(__dirname, "../public/", image.url), (err) => {
       if (err) {
@@ -162,6 +157,6 @@ module.exports.delete = async (req, res) => {
       }
     });
   }
-  //File delete on Local or Cloudinary can be added to middleware, like deleting questions of said furniture
+  // File delete on Local or Cloudinary can be added to middleware, like deleting questions of said furniture
   res.redirect("/furniture");
 };
