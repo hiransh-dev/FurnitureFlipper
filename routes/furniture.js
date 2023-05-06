@@ -12,7 +12,7 @@ const upload = multer({
   // storage: storage,
   dest: "public/temp/uploads/",
   limits: {
-    fileSize: 2 * 1024 * 1024, // 2MB in bytes
+    fileSize: 4 * 1024 * 1024, // MBsizeDesired * kilobytes * bytes
     files: 4,
   },
 });
