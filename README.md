@@ -119,7 +119,7 @@ The primary purpose of this project was for training and skill practice while al
 
 > Responsive at all display resolutions
 
-<img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/LandingPage.png"></img>
+<img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/landingPage.png"></img>
 <img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/register.png"></img>
 <img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/login.png"></img>
 <br>
