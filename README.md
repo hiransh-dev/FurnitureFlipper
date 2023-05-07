@@ -122,6 +122,7 @@ The primary purpose of this project was for training and skill practice while al
 <img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/LandingPage.png"></img>
 <img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/register.png"></img>
 <img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/login.png"></img>
+<br>
 <img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/mapView.png"></img>
 <img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/newListing.png"></img>
 <img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/editPage.png"></img>
@@ -129,6 +130,7 @@ The primary purpose of this project was for training and skill practice while al
 <img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/showPage.png"></img>
 <img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/showPage2.png"></img>
 <img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/showPage3.png"></img>
+<br>
 <img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/viewListings.png"></img>
 
 <!-- ## Video -->
