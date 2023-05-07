@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Ysabeau:ital@0;1&display=swap");
+
+#logo-div {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+#logo-font {
+  font-family: "Ysabeau", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 2rem;
+  color: white;
+  text-decoration: none;
+}
+#logo-img {
+  width: 6vh;
+}
+#tagline {
+  text-align: center;
+}
+.img-mobile-responsive {
+  width: 18vw;
+}
+.img-attri {
+  width: 10rem;
+}

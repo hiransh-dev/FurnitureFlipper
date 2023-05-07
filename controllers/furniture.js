@@ -15,7 +15,7 @@ module.exports.index = async (req, res) => {
   const curPageNum = req.query.page ? req.query.page : 1;
   const options = {
     page: curPageNum,
-    limit: 8,
+    limit: 10,
     collation: {
       locale: "en",
     },
@@ -48,7 +48,7 @@ module.exports.searchFurniture = async (req, res) => {
   const searchRegex = new RegExp(searchString, "i");
   const options = {
     page: curPageNum,
-    limit: 8,
+    limit: 10,
     collation: {
       locale: "en",
     },
@@ -71,7 +71,7 @@ module.exports.userFurnitureList = async (req, res) => {
   const curPageNum = req.query.page ? req.query.page : 1;
   const options = {
     page: curPageNum,
-    limit: 8,
+    limit: 10,
     collation: {
       locale: "en",
     },
