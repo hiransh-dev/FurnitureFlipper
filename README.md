@@ -1,13 +1,10 @@
-<link rel="stylesheet" href="readme_res/readmd.css"></link>
+<center>
+<div >
+    <img src="public/img/furnitureflipper_logo_nobg.png" width="60"> <br>
+    <h2>FurnitureFlipper</h2>
 
-<div id="logo-div">
-    <img id="logo-img" src="public/img/furnitureflipper_logo_nobg.png"> 
-    <label id="logo-font">FurnitureFlipper<label>
 </div>
-
-<div id="tagline">
-<label>List your used Furniture</label>
-</div>
+</center>
 
 ## 🌟 Description
 
@@ -122,17 +119,17 @@ The primary purpose of this project was for training and skill practice while al
 
 > Responsive at all display resolutions
 
-<img class="img-mobile-responsive" src="readme_res/furnitureFlipper_Screencapture/responsive/LandingPage.png"></img>
-<img class="img-mobile-responsive" src="readme_res/furnitureFlipper_Screencapture/responsive/register.png"></img>
-<img class="img-mobile-responsive" src="readme_res/furnitureFlipper_Screencapture/responsive/login.png"></img>
-<img class="img-mobile-responsive" src="readme_res/furnitureFlipper_Screencapture/responsive/mapView.png"></img>
-<img class="img-mobile-responsive" src="readme_res/furnitureFlipper_Screencapture/responsive/newListing.png"></img>
-<img class="img-mobile-responsive" src="readme_res/furnitureFlipper_Screencapture/responsive/editPage.png"></img>
+<img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/LandingPage.png"></img>
+<img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/register.png"></img>
+<img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/login.png"></img>
+<img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/mapView.png"></img>
+<img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/newListing.png"></img>
+<img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/editPage.png"></img>
 <br>
-<img class="img-mobile-responsive" src="readme_res/furnitureFlipper_Screencapture/responsive/showPage.png"></img>
-<img class="img-mobile-responsive" src="readme_res/furnitureFlipper_Screencapture/responsive/showPage2.png"></img>
-<img class="img-mobile-responsive" src="readme_res/furnitureFlipper_Screencapture/responsive/showPage3.png"></img>
-<img class="img-mobile-responsive" src="readme_res/furnitureFlipper_Screencapture/responsive/viewListings.png"></img>
+<img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/showPage.png"></img>
+<img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/showPage2.png"></img>
+<img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/showPage3.png"></img>
+<img width="200" src="readme_res/furnitureFlipper_Screencapture/responsive/viewListings.png"></img>
 
 <!-- ## Video -->
 
