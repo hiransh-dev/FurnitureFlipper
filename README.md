@@ -6,7 +6,7 @@
 </div>
 
 <div id="tagline">
-<label>List your used Furniture for sale</label>
+<label>List your used Furniture</label>
 </div>
 
 ## 🌟 Description
@@ -14,7 +14,7 @@
 FurnitureFlipper is a WebApp for listing your used furniture for buy or sell. Users can easily create & manage a listing, mark it on a map for other users to view & inquire about by asking questions or contacting the lister directly. Additionally, they can view other users' listings through search, feed or on a Map to view the ones nearby.<br><br>
 
 Tldr;
-It's the yellowpages of listing used furniture for buying & selling but with a Map & Interactice UI.
+It's the yellowpages of listing your used furniture for buying & selling but with a Map & Interactice UI.
 
 ## 🌱 Purpose
 
@@ -142,7 +142,7 @@ The primary purpose of this project was for training and skill practice while al
 
 - ### 🔐 Authentication & Authorization with Passport
 
-  This project uses the Passport authentication middleware to facilitate user registration and login. In addition to authentication, Passport is also used to generate a session cookie and serialize/deserialize the user for authorization of operations such as editing and deleting authored listings, as well as performing other actions on questions in backend.
+  This project uses the Passport authentication middleware to facilitate user registration and login. In addition to authentication, Passport is also used to generate a session cookie and serialize/deserialize the user for backend authorization of operations such as editing and deleting authored listings, as well as performing other actions on questions.
 
 - ### 📝 CRUD operations with RESTful
 
@@ -256,10 +256,10 @@ The primary purpose of this project was for training and skill practice while al
 
 - BingAI for Logo & Landing page images <br>
 
-  <img class="img-attri" src="public/img/furnitureflipper_logo_nobg.png" />
+  <img class="img-attri" src="public/img/furnitureflipper_logo_nobg.png" /><br>
   <img class="img-attri" src="public/img/home-img-1.jpg" />
-  <img class="img-attri" src="public/img/home-img-2.jpg" /><br>
-  <img class="img-attri" src="public/img/home-img-3.jpg" /><br>
+  <img class="img-attri" src="public/img/home-img-2.jpg" />
+  <img class="img-attri" src="public/img/home-img-3.jpg" />
 
 - Leaflet & OpenStreetMaps
 - Masonry
