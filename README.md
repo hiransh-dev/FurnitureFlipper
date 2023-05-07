@@ -11,7 +11,7 @@
 
 ## 🌟 Description
 
-FurnitureFlipper is a WebApp for listing your used furniture for buy or sell. Users can easily create & manage a listing, mark it on a map for other users to view & inquire about by asking questions or contacting the lister directly. Additionally, they can view other users' listings through search, feed or on a Map to view the ones nearby.<br><br>
+FurnitureFlipper is a WebApp for listing your used furniture for buy or sell. Users can easily create & manage a listing, mark it on a map for other users to view & inquire about by asking questions or by contacting the lister directly. Additionally, they can view other users' listings through search, feed or on a Map to view the ones nearby.<br><br>
 
 Tldr;
 It's the yellowpages of listing your used furniture for buying & selling but with a Map & Interactice UI.
@@ -176,26 +176,26 @@ The primary purpose of this project was for training and skill practice while al
 
   - #### 🪑 FurnitureSchema
 
-  | Field Name | Data Type                  | Description                                                                                                     |
-  | ---------- | -------------------------- | --------------------------------------------------------------------------------------------------------------- |
-  | title      | string                     | The title of the furniture item.                                                                                |
-  | price      | number                     | The price of the furniture item.                                                                                |
-  | desc       | string                     | The description of the furniture item.                                                                          |
-  | lat        | number                     | The latitude coordinate of the furniture item's location.                                                       |
-  | lng        | number                     | The longitude coordinate of the furniture item's location.                                                      |
-  | imageurl   | object array               | An object array containing the URLs and filename(s) of the image associated with the item.                      |
-  | timestamp  | string                     | The date and time the furniture item was added to the system, formatted as a string (e.g. "YYYY-MM-DD HH:MM").. |
-  | author     | reference (ObjectId)       | A reference to the `UserSchema` who authored the furniture item.                                                |
-  | questions  | reference array (ObjectId) | An array of references to `QuestionsSchema` associated with the furniture item.                                 |
+  | Field Name | Data Type                  | Required | Description                                                                                                     |
+  | ---------- | -------------------------- | -------- | --------------------------------------------------------------------------------------------------------------- |
+  | title      | string                     | True     | The title of the furniture item.                                                                                |
+  | price      | number                     | True     | The price of the furniture item.                                                                                |
+  | desc       | string                     | False    | The description of the furniture item.                                                                          |
+  | lat        | number                     | True     | The latitude coordinate of the furniture item's location.                                                       |
+  | lng        | number                     | True     | The longitude coordinate of the furniture item's location.                                                      |
+  | imageurl   | object array               | True     | An object array containing the URLs and filename(s) of the image associated with the item.                      |
+  | timestamp  | string                     | True     | The date and time the furniture item was added to the system, formatted as a string (e.g. "YYYY-MM-DD HH:MM").. |
+  | author     | reference (ObjectId)       | True     | A reference to the `UserSchema` who authored the furniture item.                                                |
+  | questions  | reference array (ObjectId) | False    | An array of references to `QuestionsSchema` associated with the furniture item.                                 |
 
   - #### ❓ QuestionsSchema
 
-  | Field Name | Data Type            | Description                                                                                              |
-  | ---------- | -------------------- | -------------------------------------------------------------------------------------------------------- |
-  | ques       | string               | The text of the question.                                                                                |
-  | ans        | string               | The text of the answer to the question.                                                                  |
-  | author     | reference (ObjectId) | A reference to the `UserSchema` who authored the question.                                               |
-  | timestamp  | string               | The date and time the question was added to the system, formatted as a string (e.g. "YYYY-MM-DD HH:MM"). |
+  | Field Name | Data Type            | Required | Description                                                                                              |
+  | ---------- | -------------------- | -------- | -------------------------------------------------------------------------------------------------------- |
+  | ques       | string               | True     | The text of the question.                                                                                |
+  | ans        | string               | False    | The text of the answer to the question.                                                                  |
+  | author     | reference (ObjectId) | True     | A reference to the `UserSchema` who authored the question.                                               |
+  | timestamp  | string               | True     | The date and time the question was added to the system, formatted as a string (e.g. "YYYY-MM-DD HH:MM"). |
 
 - ### 👮 Joi Validations
 
