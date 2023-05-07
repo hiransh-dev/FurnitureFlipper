@@ -4,7 +4,7 @@ const Furniture = require(path.join(__dirname, "/models/dbFurniture"));
 const Questions = require(path.join(__dirname, "/models/dbQuestions"));
 
 //TO DELETE FROM CLOUDINARY
-// const { cloudinary } = require("../cloudinary");
+const { cloudinary } = require(path.join(__dirname, "/cloudinary"));
 //TO DELETE FROM LOCAL STORAGE (UPLOADED MY MULTER)
 const fs = require("fs");
 
@@ -45,18 +45,18 @@ const isQuestionAuthor = async (req, res, next) => {
 
 const unexpFileDel = async (files) => {
   // Deletes on Cloudinary Storage
-  // for (let file of files) {
-  //   await cloudinary.uploader.destroy(file.filename);
-  // }
-  // Deletes on Local Storage, Remove when switching to cloudinary storage
   for (let file of files) {
-    fs.unlink(path.join(__dirname, file.path), (err) => {
-      if (err) {
-        throw new expressError("Internal Error", 500);
-      }
-      // console.log("deleted" + path.join(__dirname, "../", file.path));
-    });
+    await cloudinary.uploader.destroy(file.filename);
   }
+  // Deletes on Local Storage, Remove when switching to cloudinary storage
+  // for (let file of files) {
+  //   fs.unlink(path.join(__dirname, file.path), (err) => {
+  //     if (err) {
+  //       throw new expressError("Internal Error", 500);
+  //     }
+  //     // console.log("deleted" + path.join(__dirname, "../", file.path));
+  //   });
+  // }
 };
 
 module.exports = {

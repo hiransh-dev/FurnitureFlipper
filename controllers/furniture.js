@@ -81,7 +81,6 @@ module.exports.userFurnitureList = async (req, res) => {
     { author: req.user._id },
     options,
     function (err, result) {
-      // console.log(result.docs);
       return res.render("furniture/mylist", { result, title: "My List" });
     }
   );
@@ -112,9 +111,9 @@ module.exports.new = async (req, res, next) => {
   new_furniture.author = req.user._id;
   new_furniture.imageurl = req.files.map((f) => ({
     // FOR LOCAL STORAGE URL, REMOVE/COMMENT WHEN DEPLOYED OR USING CLOUDINARY.
-    url: "/temp/uploads/" + f.filename, //cant use f.path since it points to public & public is served as a static asset
+    // url: "/temp/uploads/" + f.filename, //cant use f.path since it points to public & public is served as a static asset
     // ENABLE THIS FOR CLOUDINARY STORAGE, WHEN DEPLOYED.
-    // url: f.path,
+    url: f.path,
 
     filename: f.filename,
   }));
@@ -142,6 +141,16 @@ module.exports.renderEdit = async (req, res) => {
 
 module.exports.update = async (req, res, next) => {
   const foundFurniture = await Furniture.findById(req.params.id);
+  if (req.body.deleteImgs) {
+    let totalSelected = 0;
+    for (let i of req.body.deleteImgs) {
+      totalSelected++;
+    }
+    if (totalSelected === foundFurniture.imageurl.length) {
+      console.log(foundFurniture.imageurl.length);
+      return next(new expressError("Can't delete all image files", 500));
+    }
+  }
   const countTotalImages = foundFurniture.imageurl.length + req.files.length;
   if (countTotalImages >= 5) {
     unexpFileDel(req.files);
@@ -173,9 +182,9 @@ module.exports.update = async (req, res, next) => {
   });
   const newimgs = req.files.map((f) => ({
     // FOR LOCAL STORAGE URL, REMOVE/COMMENT WHEN DEPLOYED OR USING CLOUDINARY.
-    url: "/temp/uploads/" + f.filename,
+    //url: "/temp/uploads/" + f.filename,
     // ENABLE THIS FOR CLOUDINARY STORAGE, WHEN DEPLOYED.
-    // url: f.path
+    url: f.path,
 
     filename: f.filename,
   }));
@@ -186,20 +195,22 @@ module.exports.update = async (req, res, next) => {
     await newEdit_furniture.updateOne({
       $pull: { imageurl: { filename: { $in: req.body.deleteImgs } } },
     });
+    // Deletes on Cloudinary Storage
+    for (let imageFilename of req.body.deleteImgs) {
+      await cloudinary.uploader.destroy(imageFilename);
+    }
+    // Deletes on Local Storage, Remove when switching to cloudinary storage
+    // for (let image of req.body.deleteImgs) {
+    //   fs.unlink(
+    //     path.join(__dirname, "../public/temp/uploads", image),
+    //     (err) => {
+    //       if (err) {
+    //         throw new expressError("Internal Error", 500);
+    //       }
+    //     }
+    //   );
+    // }
   }
-  // Deletes on Cloudinary Storage
-  // for (let imageFilename of req.body.deleteImgs) {
-  //   await cloudinary.uploader.destroy(imageFilename);
-  // }
-  // Deletes on Local Storage, Remove when switching to cloudinary storage
-  for (let image of req.body.deleteImgs) {
-    fs.unlink(path.join(__dirname, "../public/temp/uploads", image), (err) => {
-      if (err) {
-        throw new expressError("Internal Error", 500);
-      }
-    });
-  }
-
   res.redirect(`/furniture/${req.params.id}`);
 };
 
@@ -207,19 +218,19 @@ module.exports.delete = async (req, res) => {
   // Find object for it to delete on Cloudinary Storage or Local Storage
   const furnitureToDel = await Furniture.findById(req.params.id);
   // Deletes on Cloudinary Storage
-  // for (let image of furnitureToDel.imageurl) {
-  //   await cloudinary.uploader.destroy(image.filename);
-  // }
-  // Deletes on Local Storage, Remove when switching to cloudinary storage
   for (let image of furnitureToDel.imageurl) {
-    fs.unlink(path.join(__dirname, "../public/", image.url), (err) => {
-      if (err) {
-        throw new expressError("Internal Error", 500);
-        // console.error(err);
-        // return;
-      }
-    });
+    await cloudinary.uploader.destroy(image.filename);
   }
+  // Deletes on Local Storage, Remove when switching to cloudinary storage
+  // for (let image of furnitureToDel.imageurl) {
+  //   fs.unlink(path.join(__dirname, "../public/", image.url), (err) => {
+  //     if (err) {
+  //       throw new expressError("Internal Error", 500);
+  //       // console.error(err);
+  //       // return;
+  //     }
+  //   });
+  // }
   // This deletes the questions with post Middleware that executes after findOneAndDelete in dbFurniture Schema
   await Furniture.findByIdAndDelete(req.params.id);
   // File delete on Local or Cloudinary can be added to middleware, like deleting questions of said furniture
