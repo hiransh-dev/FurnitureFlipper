@@ -251,16 +251,15 @@ The primary purpose of this project was for training and skill practice while al
 
 ## 📣 Attributions
 
-- BingAI for Logo & Landing page images <br>
-
-  <img width="180" src="public/img/furnitureflipper_logo_nobg.png" /><br>
-  <img width="180" src="public/img/home-img-1.jpg" />
-  <img width="180" src="public/img/home-img-2.jpg" />
-  <img width="180" src="public/img/home-img-3.jpg" />
-
+- UIKit CSS Framework
 - Leaflet & OpenStreetMaps
 - Masonry
-- UIKit CSS Framework
+- BingAI for Logo & Landing page images
+
+  <img width="180" src="public/img/home-img-1.jpg" />
+  <img width="180" src="public/img/home-img-2.jpg" />
+  <img width="180" src="public/img/home-img-3.jpg" /><br>
+  <img width="100" src="public/img/furnitureflipper_logo_nobg.png" />
 
 ## 📋 License
 
