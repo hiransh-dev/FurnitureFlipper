@@ -1,10 +1,7 @@
-<center>
-<div >
-    <img src="public/img/furnitureflipper_logo_nobg.png" width="60"> <br>
-    <h2>FurnitureFlipper</h2>
-
+<div align="center">
+    <img src="public/img/furnitureflipper_logo_nobg.png" width="100">
+    <h2 style="text-align: center;">FurnitureFlipper</h2>
 </div>
-</center>
 
 ## 🌟 Description
 
@@ -256,10 +253,10 @@ The primary purpose of this project was for training and skill practice while al
 
 - BingAI for Logo & Landing page images <br>
 
-  <img class="img-attri" src="public/img/furnitureflipper_logo_nobg.png" /><br>
-  <img class="img-attri" src="public/img/home-img-1.jpg" />
-  <img class="img-attri" src="public/img/home-img-2.jpg" />
-  <img class="img-attri" src="public/img/home-img-3.jpg" />
+  <img width="180" src="public/img/furnitureflipper_logo_nobg.png" /><br>
+  <img width="180" src="public/img/home-img-1.jpg" />
+  <img width="180" src="public/img/home-img-2.jpg" />
+  <img width="180" src="public/img/home-img-3.jpg" />
 
 - Leaflet & OpenStreetMaps
 - Masonry
