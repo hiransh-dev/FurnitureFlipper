@@ -201,7 +201,7 @@ The primary purpose of this project was for training and skill practice while al
 
 - ### 🖼️ Multer middleware
 
-  - Multer middleware is used for handling multipart/form-data for file uploads & file validations like Size, Limit & Mimetypes to only support. (Upto 4 Image files of type JPG/JPEG/PNG each within 4MB).
+  - Multer middleware is used for handling multipart/form-data for file uploads & file validations like Size, Limit & Mimetypes to only support; upto 4 Image files of type JPG/JPEG/PNG each within 4MB.
 
 - ### 🗺️ Leaflet & OpenStreetMaps
 
