@@ -234,6 +234,7 @@ The primary purpose of this project was for training and skill practice while al
   - Method-Override to handle PUT/DELETE requests in Form submissions.
   - MongoosePaginate to get data properties for pagination.
   - Cloudinary for storing images.
+  - dotenv for cloudinary env variables.
   - Connect-Flash for flash notifications (still implementing flash notifications).
 
 ## 🛠️ Setup
