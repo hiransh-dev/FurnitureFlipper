@@ -10,7 +10,7 @@
 3. [Technologies](https://github.com/hirndev/FurnitureFlipper#-technologies)
 4. [Features](https://github.com/hirndev/FurnitureFlipper#-features)
 5. [Screenshots](https://github.com/hirndev/FurnitureFlipper#%EF%B8%8F-screenshots)
-6. [Implementation](https://github.com/hirndev/FurnitureFlipper#implementation)
+6. [Implementation](https://github.com/hirndev/FurnitureFlipper#%EF%B8%8F-implementation)
 7. [Setup](https://github.com/hirndev/FurnitureFlipper#%EF%B8%8F-setup)
 8. [ToDo](https://github.com/hirndev/FurnitureFlipper#-to-do)
 9. [Attributions](https://github.com/hirndev/FurnitureFlipper#-attributions)
