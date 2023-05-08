@@ -1,6 +1,6 @@
 <div align="center">
     <img src="public/img/furnitureflipper_logo_nobg.png" width="100">
-    <h2 style="text-align: center;">FurnitureFlipper</h2>
+    <h1 style="text-align: center;">FurnitureFlipper</h2>
 </div>
 
 ## 🌟 Description
