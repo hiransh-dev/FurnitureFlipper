@@ -40,7 +40,7 @@ The primary purpose of this project was for training and skill practice while al
 ## 🧮 Features
 
 - View used furniture listings posted by other users.
-- Navigate on a map to view listings near you.
+- Navigate on an interactive map to view listings near you.
 - Search for relevant listings.
 - Register or Login to the platform.
 - Users can view contact details of used furniture they're interested.
