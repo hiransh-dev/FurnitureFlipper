@@ -35,6 +35,8 @@ The primary purpose of this project was for training and skill practice while al
 - Users can create their own furniture listings & manage it.
 - Upload pictures of their used furniture.
 - Allow location access to mark the approximate location of the listing on the map or mark it yourself.
+- Protected routes in the backend with Authentication & Authorization through passport.
+- Protected routes in the backend from invalid data inputs from Post request with Joi validations.
 
 ## 🖥️ Screenshots
 
