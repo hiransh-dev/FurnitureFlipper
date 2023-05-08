@@ -3,6 +3,19 @@
     <h1 style="text-align: center;">FurnitureFlipper</h2>
 </div>
 
+## 📑 Table of Contents
+
+1. [Description](https://github.com/hirndev/FurnitureFlipper#-description)
+2. [Purpose](https://github.com/hirndev/FurnitureFlipper#-purpose)
+3. [Technologies](https://github.com/hirndev/FurnitureFlipper#-technologies)
+4. [Features](https://github.com/hirndev/FurnitureFlipper#-features)
+5. [Screenshots](https://github.com/hirndev/FurnitureFlipper#%EF%B8%8F-screenshots)
+6. [Implementation](https://github.com/hirndev/FurnitureFlipper#implementation)
+7. [Setup](https://github.com/hirndev/FurnitureFlipper#%EF%B8%8F-setup)
+8. [ToDo](https://github.com/hirndev/FurnitureFlipper#-to-do)
+9. [Attributions](https://github.com/hirndev/FurnitureFlipper#-attributions)
+10. [License](https://github.com/hirndev/FurnitureFlipper#-license)
+
 ## 🌟 Description
 
 FurnitureFlipper is a WebApp for listing your used furniture for buy or sell. Users can easily create & manage a listing, mark it on a map for other users to view & inquire about by asking questions or by contacting the lister directly. Additionally, they can view other users' listings through search, feed or on a Map to view the ones nearby.<br><br>
@@ -136,7 +149,7 @@ The primary purpose of this project was for training and skill practice while al
 
 <!-- video for it -->
 
-## Implementation
+## ⚗️ Implementation
 
 - ### 🔐 Authentication & Authorization with Passport
 
